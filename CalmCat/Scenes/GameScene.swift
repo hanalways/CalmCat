@@ -8,7 +8,7 @@
 import SpriteKit
 
 class GameScene: SKScene {
-  let label = SKLabelNode(text: "CalmCat")
+  let label = SKLabelNode(text: "o")
   
   // adding in the cat
   let catSprite = SKSpriteNode(imageNamed: "catSprite")
