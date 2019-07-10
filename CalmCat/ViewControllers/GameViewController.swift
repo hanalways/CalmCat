@@ -6,9 +6,44 @@
 //
 
 import SpriteKit
-import Foundation
+import UIKit
 
 class GameViewController: UIViewController {
+
+  @IBOutlet weak var displayTimer: UILabel!
+  
+  var seconds = 60
+  var timer = Timer()
+  var isTimerRunning = false
+  
+  func runTimer() {
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(GameViewController.updateTimer)), userInfo: nil, repeats: true)
+    isTimerRunning = true
+    displayTimer.isHidden = false
+  }
+  
+  @objc func updateTimer() {
+    if seconds < 1 {
+      timer.invalidate()
+    } else {
+      seconds -= 1
+      displayTimer.text = timeString(time: TimeInterval(seconds))
+    }
+  }
+  
+  func timeString(time:TimeInterval) -> String {
+    let minutes = Int(time) / 60 % 60
+    let seconds = Int(time) % 60
+    let rString = "\(minutes):\(seconds)"
+    return rString
+  }
+
+  @IBAction func startButtonTapped() {
+    if isTimerRunning == false {
+      runTimer()
+    }
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -21,17 +56,4 @@ class GameViewController: UIViewController {
     skView.presentScene(scene)
   }
   
-  @IBAction func tapButton() {
-    print("You tapped this!")
-  }
-  
-  @IBAction func knockKnock() {
-    let alert = UIAlertController(title: "The title of the alert!", message: "The body of an alert!", preferredStyle: .alert)
-    
-    let action = UIAlertAction(title: "Button Text", style: .default, handler: nil)
-    
-    alert.addAction(action)
-    
-    present(alert, animated: true, completion: nil)
-  }
 }
