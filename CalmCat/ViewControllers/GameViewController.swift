@@ -1,4 +1,3 @@
-//
 //  GameViewController.swift
 //  CalmCat
 //
@@ -7,7 +6,7 @@
 //
 
 import SpriteKit
-import UIKit
+import Foundation
 
 class GameViewController: UIViewController {
   override func viewDidLoad() {
@@ -24,5 +23,15 @@ class GameViewController: UIViewController {
   
   @IBAction func tapButton() {
     print("You tapped this!")
+  }
+  
+  @IBAction func knockKnock() {
+    let alert = UIAlertController(title: "The title of the alert!", message: "The body of an alert!", preferredStyle: .alert)
+    
+    let action = UIAlertAction(title: "Button Text", style: .default, handler: nil)
+    
+    alert.addAction(action)
+    
+    present(alert, animated: true, completion: nil)
   }
 }
