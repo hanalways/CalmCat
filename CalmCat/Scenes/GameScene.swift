@@ -6,6 +6,7 @@
 
 
 import SpriteKit
+import UIKit
 
 class GameScene: SKScene {
   // adding in the cat

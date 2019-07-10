@@ -10,9 +10,11 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+  @IBOutlet weak var tapButton: UIButton!
+  
   @IBOutlet weak var displayTimer: UILabel!
   
-  var seconds = 60
+  var seconds = 10
   var timer = Timer()
   var isTimerRunning = false
   
@@ -41,6 +43,8 @@ class GameViewController: UIViewController {
   @IBAction func startButtonTapped() {
     if isTimerRunning == false {
       runTimer()
+    } else {
+      self.tapButton.setTitle("Keep Tapping for Rhythm", for: .normal)
     }
   }
   
@@ -54,6 +58,8 @@ class GameViewController: UIViewController {
     skView.ignoresSiblingOrder = true
     scene.scaleMode = .resizeFill
     skView.presentScene(scene)
+    
+    displayTimer.isHidden = true
   }
   
 }
