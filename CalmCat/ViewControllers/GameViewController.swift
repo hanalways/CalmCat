@@ -11,9 +11,7 @@ import UIKit
 class GameViewController: UIViewController {
   
   @IBOutlet weak var tapButton: UIButton!
-  
   @IBOutlet weak var displayTimer: UILabel!
-    
   @IBOutlet weak var initializeUserTaps: UIButton!
     
   var seconds = 120
