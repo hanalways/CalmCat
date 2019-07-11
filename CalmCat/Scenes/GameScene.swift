@@ -40,8 +40,8 @@ class GameScene: SKScene {
     addChild(table)
     
     window.zPosition = -1
-    window.size = CGSize(width: size.width * 0.2, height: size.height * 0.14)
-    window.position = CGPoint(x: size.width * 0.2, y: size.height * 0.9)
+    window.size = CGSize(width: size.width * 0.23, height: size.height * 0.14)
+    window.position = CGPoint(x: size.width * 0.2, y: size.height * 0.87)
     addChild(window)
     //
 

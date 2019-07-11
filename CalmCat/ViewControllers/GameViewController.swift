@@ -16,7 +16,7 @@ class GameViewController: UIViewController {
     
   @IBOutlet weak var initializeUserTaps: UIButton!
     
-  var seconds = 70
+  var seconds = 120
   var timer = Timer()
   var isTimerRunning = false
   var timeOfLastTap = -1.0
@@ -103,7 +103,7 @@ class GameViewController: UIViewController {
   
   func animatePulse() {
     let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-    scaleAnimation.duration = 5.0
+    scaleAnimation.duration = 2.0
     scaleAnimation.fromValue = 0.0
     scaleAnimation.toValue = 0.9
     scaleAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
@@ -111,4 +111,5 @@ class GameViewController: UIViewController {
 //    scaleAnimation.autoreverses = true
     pulseLayer.add(scaleAnimation, forKey: "scale")
   }
+  
 }
