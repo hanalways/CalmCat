@@ -9,14 +9,18 @@ import SpriteKit
 import UIKit
 
 class GameViewController: UIViewController {
-
+  
   @IBOutlet weak var tapButton: UIButton!
   
   @IBOutlet weak var displayTimer: UILabel!
-  
-  var seconds = 10
+    
+  @IBOutlet weak var initializeUserTaps: UIButton!
+    
+  var seconds = 120
   var timer = Timer()
   var isTimerRunning = false
+  var timeOfLastTap = -1.0
+  var timeDifferences = [Double]()
   
   func runTimer() {
     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(GameViewController.updateTimer)), userInfo: nil, repeats: true)
@@ -43,8 +47,23 @@ class GameViewController: UIViewController {
   @IBAction func startButtonTapped() {
     if isTimerRunning == false {
       runTimer()
-    } else {
-      self.tapButton.setTitle("Keep Tapping for Rhythm", for: .normal)
+    }
+  }
+    
+    
+  @IBAction func userButtonTapped() {
+    let timeOfCurrentTap = NSDate().timeIntervalSince1970
+    
+    if timeOfLastTap > 0 {
+        let timeDifference = timeOfCurrentTap - timeOfLastTap
+        timeDifferences.append(timeDifference)
+        print(timeDifference)
+    }
+    timeOfLastTap = timeOfCurrentTap
+    
+    if timeDifferences.count == 10 {
+        let medianTapTime = timeDifferences.sorted(by: <)[timeDifferences.count/2]
+        print("This is the medianTapTime", medianTapTime)
     }
   }
   
@@ -60,6 +79,6 @@ class GameViewController: UIViewController {
     skView.presentScene(scene)
     
     displayTimer.isHidden = true
+    
   }
-  
 }
