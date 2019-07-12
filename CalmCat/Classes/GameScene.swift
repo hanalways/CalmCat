@@ -9,13 +9,61 @@ import SpriteKit
 import UIKit
 
 class GameScene: SKScene {
+  private var catPurr = SKSpriteNode()
+  private var catPurrFrames: [SKTexture] = []
+  
   
   override func didMove(to view: SKView) {
     setUpScenery()
+//    setUpCat()
+    buildCatPurr()
+  }
+  
+  func setUpCat() {
+    let cat = SKSpriteNode(imageNamed: ImageName.catSleep)
+    cat.position = CGPoint(x: 150, y: 100)
+    cat.zPosition = Layer.catSleep
+    cat.physicsBody?.categoryBitMask = PhysicsCategory.Cat
+    cat.physicsBody?.collisionBitMask = 0
+    cat.physicsBody?.isDynamic = false
+    cat.size = CGSize(width: size.width/2, height: size.height/5)
+    addChild(cat)
+//    animateCat()
+  }
+  
+  func buildCatPurr() {
+    let catPurrAnimatedAtlas = SKTextureAtlas(named: "catPurr")
+    var purrFrames: [SKTexture] = []
     
+    let numImages = catPurrAnimatedAtlas.textureNames.count
+    print("catPurrAnimatedAtlas:", catPurrAnimatedAtlas)
+    print(numImages)
+    for i in 1...numImages {
+      let catPurrTextureName = "catPurr\(i)"
+      print("CatPurrTextureName:", catPurrTextureName)
+      let frame = catPurrAnimatedAtlas.textureNamed(catPurrTextureName)
+      purrFrames.append(frame)
+      print(frame)
+      print(purrFrames)
+    }
+    catPurrFrames = purrFrames
+    
+    let firstFrameTexture = catPurrFrames[0]
+    print(catPurrFrames)
+    catPurr = SKSpriteNode(texture: firstFrameTexture)
+    catPurr.position = CGPoint(x: frame.midX, y: frame.midY)
+    catPurr.size = CGSize(width: 150, height: 150)
+    addChild(catPurr)
+    animateCatPurr()
+  }
+  
+  func animateCatPurr() {
+    catPurr.run(SKAction.repeatForever(SKAction.animate(with: catPurrFrames, timePerFrame: 0.2, resize: false, restore: true)),
+                withKey:"catPurrInPlace")
   }
   
   func setUpScenery() {
+    backgroundColor = .black
     let bed = SKSpriteNode(imageNamed: ImageName.Bed)
     bed.anchorPoint = CGPoint(x: 0, y: 0)
     bed.position = CGPoint(x: size.width * 0.0, y: size.height * -0.1)

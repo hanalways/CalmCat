@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8401620122D8EF2B00FFF909 /* catPurr.atlas */; };
 		8486D2BD22D8155D004C714A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486D2BC22D8155D004C714A /* Constants.swift */; };
 		84C9237122D3B93C00BBCF37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9237022D3B93C00BBCF37 /* AppDelegate.swift */; };
 		84C9237722D3B93C00BBCF37 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9237622D3B93C00BBCF37 /* GameScene.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8401620122D8EF2B00FFF909 /* catPurr.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catPurr.atlas; sourceTree = "<group>"; };
 		8486D2BC22D8155D004C714A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		84C9236D22D3B93C00BBCF37 /* CalmCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalmCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C9237022D3B93C00BBCF37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		84C923AA22D3E63900BBCF37 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				8401620122D8EF2B00FFF909 /* catPurr.atlas */,
 				84C9237D22D3B93D00BBCF37 /* Assets.xcassets */,
 				84C9237A22D3B93C00BBCF37 /* Main.storyboard */,
 				84C9237F22D3B93D00BBCF37 /* LaunchScreen.storyboard */,
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84C9237C22D3B93C00BBCF37 /* Main.storyboard in Resources */,
+				8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */,
 				84C9237E22D3B93D00BBCF37 /* Assets.xcassets in Resources */,
 				84C9238122D3B93D00BBCF37 /* LaunchScreen.storyboard in Resources */,
 			);
