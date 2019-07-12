@@ -9,9 +9,9 @@
 import UIKit
 
 struct ImageName {
-    static let Bed = "Bed"
-    static let Table = "Table"
-    static let Window = "Window"
+    static let Bed = "bed"
+    static let Table = "table"
+    static let Window = "window"
 }
 
 struct SoundFile {

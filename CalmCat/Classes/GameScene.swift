@@ -9,29 +9,32 @@ import SpriteKit
 import UIKit
 
 class GameScene: SKScene {
-  // cat sprites
-//  var catPurr = SKSpriteNode()
-//  var catPurrFrames: [SKTexture] = []  
   
   override func didMove(to view: SKView) {
-    backgroundColor = SKColor.black
+    setUpScenery()
     
-//    buildCatPurr()
   }
   
-//  func buildCatPurr() {
-//    let catPurrAnimatedAtlas = SKTextureAtlas(named: "catPurr")
-//    var purrFrames: [SKTexture] = []
-//    let numImages = catPurrAnimatedAtlas.textureNames.count
-//    for i in 1...numImages {
-//      let catPurrTextureName = "catPurr-\(i)"
-//      purrFrames.append(catPurrAnimatedAtlas.textureNamed(catPurrTextureName))
-//    }
-//    catPurrFrames = purrFrames
-//
-//    let firstFrameTexture = catPurrFrames[0]
-//    catPurr = SKSpriteNode(texture: firstFrameTexture)
-//    catPurr.position = CGPoint(x: frame.midX, y: frame.midY)
-//    addChild(catPurr)
-//  }
+  func setUpScenery() {
+    let bed = SKSpriteNode(imageNamed: ImageName.Bed)
+    bed.anchorPoint = CGPoint(x: 0, y: 0)
+    bed.position = CGPoint(x: size.width * 0.0, y: size.height * -0.1)
+    bed.zPosition = Layer.Bed
+    bed.size = CGSize(width: size.width * 1.11, height: size.height * 0.6)
+    addChild(bed)
+    
+    let table = SKSpriteNode(imageNamed: ImageName.Table)
+    table.anchorPoint = CGPoint(x: 0, y: 0)
+    table.position = CGPoint(x: size.width * 0.35, y: size.height * 0.6)
+    table.zPosition = Layer.Table
+    table.size = CGSize(width: size.width * 0.65, height: size.height * 0.3)
+    addChild(table)
+    
+    let window = SKSpriteNode(imageNamed: ImageName.Window)
+    window.anchorPoint = CGPoint(x: 0, y: 0)
+    window.position = CGPoint(x: size.width * 0.1, y: size.height * 0.8)
+    window.zPosition = Layer.Window
+    window.size = CGSize(width: size.width * 0.23, height: size.height * 0.14)
+    addChild(window)
+  }
 }
