@@ -83,8 +83,8 @@ class GameViewController: UIViewController {
     displayTimer.isHidden = true
 
 //    NOT WORKING - initializeUserTaps.layer.zPosition = CGFloat(integerLiteral: 1)
-    initializeUserTaps.layer.cornerRadius = initializeUserTaps.frame.size.width/2.0
-    createPulse()
+//    initializeUserTaps.layer.cornerRadius = initializeUserTaps.frame.size.width/2.0
+//    createPulse()
   }
   
   func createPulse() {

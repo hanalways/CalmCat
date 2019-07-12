@@ -17,6 +17,7 @@ class GameScene: SKScene {
     setUpScenery()
 //    setUpCat()
     buildCatPurr()
+    userIndicatorCircle()
   }
   
   func setUpCat() {
@@ -29,6 +30,20 @@ class GameScene: SKScene {
     cat.size = CGSize(width: size.width/2, height: size.height/5)
     addChild(cat)
 //    animateCat()
+  }
+  
+  func userIndicatorCircle() {
+    let circle = SKShapeNode(circleOfRadius: 100)
+    circle.position = CGPoint(x: catPurr.position.x, y: catPurr.position.y)
+    circle.zPosition = 1
+    circle.strokeColor = .white
+    circle.glowWidth = 1.0
+    circle.fillColor = .orange
+    addChild(circle)
+  }
+  
+  func animateUserIndicatorCircle() {
+    
   }
   
   func buildCatPurr() {
