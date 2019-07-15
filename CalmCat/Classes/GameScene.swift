@@ -13,7 +13,7 @@ class GameScene: SKScene {
   private var catPurrFrames: [SKTexture] = []
   private var fingerPointer = SKSpriteNode()
   private var fingerPointFrames: [SKTexture] = []
-  private let circle = SKShapeNode(circleOfRadius: 30)
+  private let circle = SKShapeNode(circleOfRadius: 20)
   
   
   override func didMove(to view: SKView) {
@@ -37,7 +37,7 @@ class GameScene: SKScene {
   
   func animateUserIndicatorCircle() {
     let pulseUp = SKAction.scale(to: 1.0, duration: 0.7)
-    let pulseDown = SKAction.scale(to: 0.5, duration: 0.7)
+    let pulseDown = SKAction.scale(to: 0.0, duration: 0.7)
     let pulse = SKAction.sequence([pulseUp, pulseDown])
     let repeatPulse = SKAction.repeatForever(pulse)
     self.circle.run(repeatPulse)
