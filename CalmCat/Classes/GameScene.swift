@@ -11,6 +11,7 @@ import UIKit
 class GameScene: SKScene {
   private var catPurr = SKSpriteNode()
   private var catPurrFrames: [SKTexture] = []
+  private let circle = SKShapeNode(circleOfRadius: 100)
   
   
   override func didMove(to view: SKView) {
@@ -20,30 +21,35 @@ class GameScene: SKScene {
     userIndicatorCircle()
   }
   
-  func setUpCat() {
-    let cat = SKSpriteNode(imageNamed: ImageName.catSleep)
-    cat.position = CGPoint(x: 150, y: 100)
-    cat.zPosition = Layer.catSleep
-    cat.physicsBody?.categoryBitMask = PhysicsCategory.Cat
-    cat.physicsBody?.collisionBitMask = 0
-    cat.physicsBody?.isDynamic = false
-    cat.size = CGSize(width: size.width/2, height: size.height/5)
-    addChild(cat)
-//    animateCat()
-  }
+//  func setUpCat() {
+//    let cat = SKSpriteNode(imageNamed: ImageName.catSleep)
+//    cat.position = CGPoint(x: 150, y: 100)
+//    cat.zPosition = Layer.catSleep
+//    cat.physicsBody?.categoryBitMask = PhysicsCategory.Cat
+//    cat.physicsBody?.collisionBitMask = 0
+//    cat.physicsBody?.isDynamic = false
+//    cat.size = CGSize(width: size.width/2, height: size.height/5)
+//    addChild(cat)
+////    animateCat()
+//  }
   
   func userIndicatorCircle() {
-    let circle = SKShapeNode(circleOfRadius: 100)
+
     circle.position = CGPoint(x: catPurr.position.x, y: catPurr.position.y)
     circle.zPosition = 1
     circle.strokeColor = .white
     circle.glowWidth = 1.0
-    circle.fillColor = .orange
+    circle.fillColor = .clear
     addChild(circle)
+    animateUserIndicatorCircle()
   }
   
   func animateUserIndicatorCircle() {
-    
+    let pulseUp = SKAction.scale(to: 3.0, duration: 1.0)
+    let pulseDown = SKAction.scale(to: 0.5, duration: 1.0)
+    let pulse = SKAction.sequence([pulseUp, pulseDown])
+    let repeatPulse = SKAction.repeatForever(pulse)
+    self.circle.run(repeatPulse)
   }
   
   func buildCatPurr() {
