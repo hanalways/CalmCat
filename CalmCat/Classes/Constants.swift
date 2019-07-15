@@ -15,6 +15,7 @@ struct ImageName {
     static let catSleep = "catSleep"
     static let calmCatLogo = "calmCat"
     static let catStaticPurr = "catLaunch"
+    static let fingerPointer = "fingerPoint"
 }
 
 struct SoundFile {
@@ -27,10 +28,12 @@ struct Layer {
     static let Window: CGFloat = 0
     static let catSleep: CGFloat = 1
     static let calmCatLogo: CGFloat = 1
+    static let fingerPointer: CGFloat = 2
 }
 
 struct PhysicsCategory {
     static let Cat: UInt32 = 1
+    static let Finger: UInt = 2
 }
 
 struct GameConfiguration {

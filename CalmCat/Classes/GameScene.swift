@@ -11,33 +11,24 @@ import UIKit
 class GameScene: SKScene {
   private var catPurr = SKSpriteNode()
   private var catPurrFrames: [SKTexture] = []
-  private let circle = SKShapeNode(circleOfRadius: 100)
+  private var fingerPointer = SKSpriteNode()
+  private var fingerPointFrames: [SKTexture] = []
+  private let circle = SKShapeNode(circleOfRadius: 30)
   
   
   override func didMove(to view: SKView) {
     setUpScenery()
 //    setUpCat()
     buildCatPurr()
+    buildFingerPointer()
     userIndicatorCircle()
   }
   
-//  func setUpCat() {
-//    let cat = SKSpriteNode(imageNamed: ImageName.catSleep)
-//    cat.position = CGPoint(x: 150, y: 100)
-//    cat.zPosition = Layer.catSleep
-//    cat.physicsBody?.categoryBitMask = PhysicsCategory.Cat
-//    cat.physicsBody?.collisionBitMask = 0
-//    cat.physicsBody?.isDynamic = false
-//    cat.size = CGSize(width: size.width/2, height: size.height/5)
-//    addChild(cat)
-////    animateCat()
-//  }
-  
   func userIndicatorCircle() {
-
-    circle.position = CGPoint(x: catPurr.position.x, y: catPurr.position.y)
+    
+    circle.position = CGPoint(x: fingerPointer.position.x - 25, y: fingerPointer.position.y + 50)
     circle.zPosition = 1
-    circle.strokeColor = .white
+    circle.strokeColor = SKColor.white.withAlphaComponent(0.5)
     circle.glowWidth = 1.0
     circle.fillColor = .clear
     addChild(circle)
@@ -45,32 +36,57 @@ class GameScene: SKScene {
   }
   
   func animateUserIndicatorCircle() {
-    let pulseUp = SKAction.scale(to: 3.0, duration: 1.0)
-    let pulseDown = SKAction.scale(to: 0.5, duration: 1.0)
+    let pulseUp = SKAction.scale(to: 1.0, duration: 0.7)
+    let pulseDown = SKAction.scale(to: 0.5, duration: 0.7)
     let pulse = SKAction.sequence([pulseUp, pulseDown])
     let repeatPulse = SKAction.repeatForever(pulse)
     self.circle.run(repeatPulse)
   }
+  
+  func buildFingerPointer() {
+    let fingerPointerAnimatedAtlas = SKTextureAtlas(named: "fingerPoint")
+    var fingerFrames: [SKTexture] = []
+    
+    let numImages = fingerPointerAnimatedAtlas.textureNames.count
+    for i in 1...numImages {
+      let fingerPointTextureName = "fingerPoint\(i)"
+      let frame = fingerPointerAnimatedAtlas.textureNamed(fingerPointTextureName)
+      fingerFrames.append(frame)
+    }
+    fingerPointFrames = fingerFrames
+    
+    let firstFrameTexture = fingerFrames[0]
+    print(firstFrameTexture)
+    fingerPointer = SKSpriteNode(texture: firstFrameTexture)
+    fingerPointer.position = CGPoint(x: frame.midX + 100, y: frame.minY + 120)
+    fingerPointer.size = CGSize(width: size.width/6, height: size.height/7)
+    fingerPointer.zPosition = 2
+    
+    addChild(fingerPointer)
+    animateFingerPointer()
+  }
+  
+  func animateFingerPointer() {
+    fingerPointer.run(SKAction.repeatForever(SKAction.animate(with: fingerPointFrames, timePerFrame: 0.7, resize: false, restore: true)),
+                withKey:"fingerPointInPlace")
+  }
+  
+
   
   func buildCatPurr() {
     let catPurrAnimatedAtlas = SKTextureAtlas(named: "catPurr")
     var purrFrames: [SKTexture] = []
     
     let numImages = catPurrAnimatedAtlas.textureNames.count
-    print("catPurrAnimatedAtlas:", catPurrAnimatedAtlas)
-    print(numImages)
+    
     for i in 1...numImages {
       let catPurrTextureName = "catPurr\(i)"
-      print("CatPurrTextureName:", catPurrTextureName)
       let frame = catPurrAnimatedAtlas.textureNamed(catPurrTextureName)
       purrFrames.append(frame)
-      print(frame)
-      print(purrFrames)
     }
     catPurrFrames = purrFrames
     
     let firstFrameTexture = catPurrFrames[0]
-    print(catPurrFrames)
     catPurr = SKSpriteNode(texture: firstFrameTexture)
     catPurr.position = CGPoint(x: frame.midX, y: frame.midY)
     catPurr.size = CGSize(width: 150, height: 150)
