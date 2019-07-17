@@ -24,7 +24,15 @@ class GameScene: SKScene {
     buildFingerPointer()
     userIndicatorCircle()
     buildCatWalk()
+    
+//    let recognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
+//    view.addGestureRecognizer(recognizer)
+
   }
+  
+//  func tap(recognizer: UIGestureRecognizer) {
+//
+//  }
   
   func userIndicatorCircle() {
     
@@ -35,6 +43,7 @@ class GameScene: SKScene {
     circle.fillColor = .clear
     addChild(circle)
     animateUserIndicatorCircle()
+    
   }
   
   func animateUserIndicatorCircle() {
@@ -89,20 +98,24 @@ class GameScene: SKScene {
     let firstFrameTexture = catWalkFrames[0]
     catWalk = SKSpriteNode(texture: firstFrameTexture)
     catWalk.position = CGPoint(x: frame.minX + 100, y: frame.maxY - 350)
+    catWalk.zPosition = 1
     addChild(catWalk)
     animateCatWalk()
   }
   
   func animateCatWalk() {
     let walkRight = SKAction.moveTo(x: catWalk.position.x + 300, duration: 2.0)
+    let faceRight = SKAction.scaleX(to: -1.0, duration: 0.1)
+    let faceLeft = SKAction.scaleX(to: 1.0, duration: 0.1)
     let walkLeft = SKAction.moveTo(x: catWalk.position.x - 150, duration: 2.0)
-    let catWalkSequence = SKAction.sequence([walkRight, walkLeft])
-    let catWalkAnimation = SKAction.repeatForever(SKAction.animate(with: catWalkFrames, timePerFrame: 0.2, resize: false, restore: true))
-    
-//    let catWalkGroup = SKAction.group([catWalkSequence, catWalkAnimation])
+    let catWalkSequence = SKAction.sequence([faceRight, walkRight, faceLeft, walkLeft])
+    let catWalkAnimation = SKAction.animate(with: catWalkFrames, timePerFrame: 0.2, resize: false, restore: true)
 
-    catWalk.run(SKAction.repeatForever(catWalkSequence),
+    
+    catWalk.run(SKAction.repeatForever(catWalkAnimation),
                 withKey:"catWalkInPlace")
+    catWalk.run(SKAction.repeatForever(catWalkSequence),
+                withKey:"catWalkBackAndForth")
   }
   
   
@@ -122,6 +135,7 @@ class GameScene: SKScene {
     let firstFrameTexture = catPurrFrames[0]
     catPurr = SKSpriteNode(texture: firstFrameTexture)
     catPurr.position = CGPoint(x: frame.midX, y: frame.midY)
+    catPurr.zPosition = 2
     catPurr.size = CGSize(width: 150, height: 150)
     addChild(catPurr)
     animateCatPurr()
