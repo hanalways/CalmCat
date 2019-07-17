@@ -42,7 +42,6 @@ class GameViewController: UIViewController {
     let minutes = Int(time) / 60 % 60
     let seconds = Int(time) % 60
     let rString = String(format: "\(minutes):%02d", seconds)
-//    let rString = "\(minutes):\(seconds)"
     return rString
   }
 
@@ -63,7 +62,7 @@ class GameViewController: UIViewController {
     }
     timeOfLastTap = timeOfCurrentTap
     
-    if timeDifferences.count == 10 {
+    if timeDifferences.count == 8 {
         medianTapTime = timeDifferences.sorted(by: <)[timeDifferences.count/2]
         print("This is the medianTapTime", medianTapTime)
     }
@@ -72,42 +71,16 @@ class GameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let scene = GameScene(size: view.bounds.size)
-    let skView = view as! SKView
-    skView.showsFPS = true
-    skView.showsNodeCount = true
-    skView.ignoresSiblingOrder = true
-    scene.scaleMode = .resizeFill
-    skView.presentScene(scene)
+    if let view = view as? SKView {
+      // Create the scene programmatically
+      let scene = GameScene(size: view.bounds.size)
+      scene.scaleMode = .resizeFill
+      view.ignoresSiblingOrder = true
+      view.showsFPS = true
+      view.showsNodeCount = true
+      view.presentScene(scene)
+    }
     
     displayTimer.isHidden = true
-
-//    NOT WORKING - initializeUserTaps.layer.zPosition = CGFloat(integerLiteral: 1)
-//    initializeUserTaps.layer.cornerRadius = initializeUserTaps.frame.size.width/2.0
-//    createPulse()
   }
-  
-  func createPulse() {
-    let circularPath = UIBezierPath(arcCenter: .zero, radius: UIScreen.main.bounds.size.width/5, startAngle: 0, endAngle: 2 * .pi, clockwise: true)
-    pulseLayer.path = circularPath.cgPath
-    pulseLayer.lineWidth = 2.0
-    pulseLayer.fillColor = UIColor.clear.cgColor
-    pulseLayer.strokeColor = UIColor.white.cgColor
-    pulseLayer.lineCap = CAShapeLayerLineCap.round
-    pulseLayer.position = CGPoint(x: initializeUserTaps.frame.size.width/2.0, y: initializeUserTaps.frame.size.height/2.0)
-    initializeUserTaps.layer.addSublayer(pulseLayer)
-    animatePulse()
-  }
-  
-  func animatePulse() {
-    let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
-    scaleAnimation.duration = 2.0
-    scaleAnimation.fromValue = 0.0
-    scaleAnimation.toValue = 0.9
-    scaleAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
-    scaleAnimation.repeatCount = .greatestFiniteMagnitude
-//    scaleAnimation.autoreverses = true
-    pulseLayer.add(scaleAnimation, forKey: "scale")
-  }
-  
 }

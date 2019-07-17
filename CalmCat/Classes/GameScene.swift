@@ -11,6 +11,8 @@ import UIKit
 class GameScene: SKScene {
   private var catPurr = SKSpriteNode()
   private var catPurrFrames: [SKTexture] = []
+  private var catWalk = SKSpriteNode()
+  private var catWalkFrames: [SKTexture] = []
   private var fingerPointer = SKSpriteNode()
   private var fingerPointFrames: [SKTexture] = []
   private let circle = SKShapeNode(circleOfRadius: 20)
@@ -18,10 +20,10 @@ class GameScene: SKScene {
   
   override func didMove(to view: SKView) {
     setUpScenery()
-//    setUpCat()
     buildCatPurr()
     buildFingerPointer()
     userIndicatorCircle()
+    buildCatWalk()
   }
   
   func userIndicatorCircle() {
@@ -71,7 +73,38 @@ class GameScene: SKScene {
                 withKey:"fingerPointInPlace")
   }
   
+  func buildCatWalk() {
+    let catWalkAnimatedAtlas = SKTextureAtlas(named: "catWalk")
+    var walkFrames: [SKTexture] = []
+    
+    let numImages = catWalkAnimatedAtlas.textureNames.count
+    
+    for i in 1...numImages {
+      let catWalkTextureName = "catWalk\(i)"
+      let frame = catWalkAnimatedAtlas.textureNamed(catWalkTextureName)
+      walkFrames.append(frame)
+    }
+    catWalkFrames = walkFrames
+    
+    let firstFrameTexture = catWalkFrames[0]
+    catWalk = SKSpriteNode(texture: firstFrameTexture)
+    catWalk.position = CGPoint(x: frame.minX + 100, y: frame.maxY - 350)
+    addChild(catWalk)
+    animateCatWalk()
+  }
+  
+  func animateCatWalk() {
+    let walkRight = SKAction.moveTo(x: catWalk.position.x + 300, duration: 2.0)
+    let walkLeft = SKAction.moveTo(x: catWalk.position.x - 150, duration: 2.0)
+    let catWalkSequence = SKAction.sequence([walkRight, walkLeft])
+    let catWalkAnimation = SKAction.repeatForever(SKAction.animate(with: catWalkFrames, timePerFrame: 0.2, resize: false, restore: true))
+    
+//    let catWalkGroup = SKAction.group([catWalkSequence, catWalkAnimation])
 
+    catWalk.run(SKAction.repeatForever(catWalkSequence),
+                withKey:"catWalkInPlace")
+  }
+  
   
   func buildCatPurr() {
     let catPurrAnimatedAtlas = SKTextureAtlas(named: "catPurr")
@@ -98,6 +131,8 @@ class GameScene: SKScene {
     catPurr.run(SKAction.repeatForever(SKAction.animate(with: catPurrFrames, timePerFrame: 0.2, resize: false, restore: true)),
                 withKey:"catPurrInPlace")
   }
+  
+  
   
   func setUpScenery() {
     backgroundColor = .black
