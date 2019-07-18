@@ -17,6 +17,8 @@ class GameScene: SKScene {
   private var fingerPointFrames: [SKTexture] = []
   private let circle = SKShapeNode(circleOfRadius: 20)
   
+//  private var score: CGFloat
+  
   
   override func didMove(to view: SKView) {
     setUpScenery()
