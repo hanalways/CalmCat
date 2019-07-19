@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8401620122D8EF2B00FFF909 /* catPurr.atlas */; };
 		8451F25822DFDF9D009D621B /* CutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451F25722DFDF9D009D621B /* CutScene.swift */; };
+		8460B09722E145EE008A63BE /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460B09622E145EE008A63BE /* Score.swift */; };
 		8486D2BD22D8155D004C714A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486D2BC22D8155D004C714A /* Constants.swift */; };
 		84ADACE822DD0108005498F4 /* fingerPoint.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84ADACE722DD0108005498F4 /* fingerPoint.atlas */; };
 		84ADACEA22DD1738005498F4 /* catWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84ADACE922DD1738005498F4 /* catWalk.atlas */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		8401620122D8EF2B00FFF909 /* catPurr.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catPurr.atlas; sourceTree = "<group>"; };
 		8451F25722DFDF9D009D621B /* CutScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutScene.swift; sourceTree = "<group>"; };
+		8460B09622E145EE008A63BE /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		8486D2BC22D8155D004C714A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		84ADACE722DD0108005498F4 /* fingerPoint.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fingerPoint.atlas; sourceTree = "<group>"; };
 		84ADACE922DD1738005498F4 /* catWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catWalk.atlas; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				84C9237022D3B93C00BBCF37 /* AppDelegate.swift */,
 				84C9237622D3B93C00BBCF37 /* GameScene.swift */,
 				84C9237822D3B93C00BBCF37 /* GameViewController.swift */,
+				8460B09622E145EE008A63BE /* Score.swift */,
 				84FC121522D56E8A0082CE91 /* MenuViewController.swift */,
 				84ADACEB22DD1833005498F4 /* IntroViewController.swift */,
 				8486D2BC22D8155D004C714A /* Constants.swift */,
@@ -288,6 +291,7 @@
 			files = (
 				8486D2BD22D8155D004C714A /* Constants.swift in Sources */,
 				84C9237722D3B93C00BBCF37 /* GameScene.swift in Sources */,
+				8460B09722E145EE008A63BE /* Score.swift in Sources */,
 				8451F25822DFDF9D009D621B /* CutScene.swift in Sources */,
 				84C9237922D3B93C00BBCF37 /* GameViewController.swift in Sources */,
 				84ADACEC22DD1833005498F4 /* IntroViewController.swift in Sources */,

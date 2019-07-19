@@ -9,6 +9,8 @@ import SpriteKit
 import UIKit
 
 class GameScene: SKScene {
+  var gameViewController:GameViewController!
+  
   private var catPurr = SKSpriteNode()
   private var catPurrFrames: [SKTexture] = []
   private var catWalk = SKSpriteNode()
@@ -16,25 +18,40 @@ class GameScene: SKScene {
   private var fingerPointer = SKSpriteNode()
   private var fingerPointFrames: [SKTexture] = []
   private let circle = SKShapeNode(circleOfRadius: 20)
-  
+  private let scorer = Score()
 //  private var score: CGFloat
   
   
   override func didMove(to view: SKView) {
     setUpScenery()
-    buildCatPurr()
+//    buildCatPurr()
     buildFingerPointer()
     userIndicatorCircle()
     buildCatWalk()
+    
+
     
 //    let recognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
 //    view.addGestureRecognizer(recognizer)
 
   }
   
-//  func tap(recognizer: UIGestureRecognizer) {
-//
-//  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    guard let realTouch = touches.first else {
+      return
+    }
+    let position = realTouch.location(in: self)
+    
+    realTouch.type
+    let touchNodes = self.nodes(at: position)
+    touchNodes.forEach { (node) in
+      if node.name == "fingerPointer" {
+        self.scorer.userButtonTapped()
+      }
+    }
+//    print(touchNodes)
+  }
   
   func userIndicatorCircle() {
     
@@ -43,11 +60,12 @@ class GameScene: SKScene {
     circle.strokeColor = SKColor.white.withAlphaComponent(0.5)
     circle.glowWidth = 1.0
     circle.fillColor = .clear
+    
     addChild(circle)
     animateUserIndicatorCircle()
     
   }
-  
+    
   func animateUserIndicatorCircle() {
     let pulseUp = SKAction.scale(to: 1.0, duration: 0.7)
     let pulseDown = SKAction.scale(to: 0.0, duration: 0.7)
@@ -55,6 +73,7 @@ class GameScene: SKScene {
     let repeatPulse = SKAction.repeatForever(pulse)
     self.circle.run(repeatPulse)
   }
+  
   
   func buildFingerPointer() {
     let fingerPointerAnimatedAtlas = SKTextureAtlas(named: "fingerPoint")
@@ -74,6 +93,7 @@ class GameScene: SKScene {
     fingerPointer.position = CGPoint(x: frame.midX + 100, y: frame.minY + 120)
     fingerPointer.size = CGSize(width: size.width/6, height: size.height/7)
     fingerPointer.zPosition = 2
+    fingerPointer.name = "fingerPointer"
     
     addChild(fingerPointer)
     animateFingerPointer()
@@ -84,6 +104,7 @@ class GameScene: SKScene {
                 withKey:"fingerPointInPlace")
   }
   
+  //MARK:ALL CAT RELATED THING
   func buildCatWalk() {
     let catWalkAnimatedAtlas = SKTextureAtlas(named: "catWalk")
     var walkFrames: [SKTexture] = []
@@ -99,17 +120,18 @@ class GameScene: SKScene {
     
     let firstFrameTexture = catWalkFrames[0]
     catWalk = SKSpriteNode(texture: firstFrameTexture)
-    catWalk.position = CGPoint(x: frame.minX + 100, y: frame.maxY - 350)
+    catWalk.position = CGPoint(x: frame.minX + 200, y: frame.maxY - 375)
     catWalk.zPosition = 1
+    catWalk.anchorPoint = CGPoint(x: 0, y: 0)
     addChild(catWalk)
     animateCatWalk()
   }
   
   func animateCatWalk() {
-    let walkRight = SKAction.moveTo(x: catWalk.position.x + 300, duration: 2.0)
+    let walkRight = SKAction.moveTo(x: catWalk.position.x + 180, duration: 2.0)
+    let walkLeft = SKAction.moveTo(x: catWalk.position.x - 180, duration: 2.0)
     let faceRight = SKAction.scaleX(to: -1.0, duration: 0.1)
     let faceLeft = SKAction.scaleX(to: 1.0, duration: 0.1)
-    let walkLeft = SKAction.moveTo(x: catWalk.position.x - 150, duration: 2.0)
     let catWalkSequence = SKAction.sequence([faceRight, walkRight, faceLeft, walkLeft])
     let catWalkAnimation = SKAction.animate(with: catWalkFrames, timePerFrame: 0.2, resize: false, restore: true)
 
