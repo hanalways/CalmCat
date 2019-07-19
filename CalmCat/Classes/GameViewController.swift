@@ -9,7 +9,7 @@ import SpriteKit
 import UIKit
 
 class GameViewController: UIViewController {
-  var scene: GameScene!
+//  var scene: GameScene!
   
   @IBOutlet weak var tapButton: UIButton!
   @IBOutlet weak var displayTimer: UILabel!
