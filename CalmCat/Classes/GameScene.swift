@@ -28,6 +28,7 @@ class GameScene: SKScene {
     buildFingerPointer()
     userIndicatorCircle()
     buildCatWalk()
+    buildTimer()
     
 
     
@@ -49,15 +50,14 @@ class GameScene: SKScene {
         self.scorer.userButtonTapped()
       }
     }
-    print(touchNodes)
   }
   
   func buildTimer() {
     timer.fontName = "Arial"
     timer.text = "2:00"
-    timer.fontSize = 65
+    timer.fontSize = 30
     timer.fontColor = .white
-    timer.position = CGPoint(x: frame.midX, y: frame.maxY - 100)
+    timer.position = CGPoint(x: frame.midX, y: frame.maxY - 75)
     timer.zPosition = 1
     addChild(timer)
   }

@@ -9,6 +9,9 @@ import SpriteKit
 import UIKit
 
 class GameViewController: UIViewController {
+  @IBOutlet weak var tapButton: UIButton!
+  @IBOutlet weak var displayTimer: UILabel!
+  @IBOutlet weak var initializeUserTaps: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,5 +25,7 @@ class GameViewController: UIViewController {
       view.showsNodeCount = true
       view.presentScene(scene)
     }
+    
+    displayTimer.isHidden = true
   }
 }
