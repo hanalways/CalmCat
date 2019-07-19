@@ -19,7 +19,7 @@ class GameScene: SKScene {
   private var fingerPointFrames: [SKTexture] = []
   private let circle = SKShapeNode(circleOfRadius: 20)
   private let scorer = Score()
-//  private var score: CGFloat
+  private var timer = SKLabelNode()
   
   
   override func didMove(to view: SKView) {
@@ -43,14 +43,23 @@ class GameScene: SKScene {
     }
     let position = realTouch.location(in: self)
     
-    realTouch.type
     let touchNodes = self.nodes(at: position)
     touchNodes.forEach { (node) in
       if node.name == "fingerPointer" {
         self.scorer.userButtonTapped()
       }
     }
-//    print(touchNodes)
+    print(touchNodes)
+  }
+  
+  func buildTimer() {
+    timer.fontName = "Arial"
+    timer.text = "2:00"
+    timer.fontSize = 65
+    timer.fontColor = .white
+    timer.position = CGPoint(x: frame.midX, y: frame.maxY - 100)
+    timer.zPosition = 1
+    addChild(timer)
   }
   
   func userIndicatorCircle() {
