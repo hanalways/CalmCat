@@ -8,20 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8401620122D8EF2B00FFF909 /* catPurr.atlas */; };
+		843E7DAF22E222A000CDD7CA /* CatWalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E7DAE22E222A000CDD7CA /* CatWalk.swift */; };
+		843E7DB122E229AA00CDD7CA /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E7DB022E229AA00CDD7CA /* IntroViewController.swift */; };
 		8451F25822DFDF9D009D621B /* CutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451F25722DFDF9D009D621B /* CutScene.swift */; };
 		8460B09722E145EE008A63BE /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460B09622E145EE008A63BE /* Score.swift */; };
 		8486D2BD22D8155D004C714A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486D2BC22D8155D004C714A /* Constants.swift */; };
 		84ADACE822DD0108005498F4 /* fingerPoint.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84ADACE722DD0108005498F4 /* fingerPoint.atlas */; };
 		84ADACEA22DD1738005498F4 /* catWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 84ADACE922DD1738005498F4 /* catWalk.atlas */; };
-		84ADACEC22DD1833005498F4 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADACEB22DD1833005498F4 /* IntroViewController.swift */; };
-		84ADACEE22DD2676005498F4 /* CutScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84ADACED22DD2676005498F4 /* CutScene.sks */; };
 		84C9237122D3B93C00BBCF37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9237022D3B93C00BBCF37 /* AppDelegate.swift */; };
 		84C9237722D3B93C00BBCF37 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9237622D3B93C00BBCF37 /* GameScene.swift */; };
 		84C9237922D3B93C00BBCF37 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9237822D3B93C00BBCF37 /* GameViewController.swift */; };
 		84C9237C22D3B93C00BBCF37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C9237A22D3B93C00BBCF37 /* Main.storyboard */; };
 		84C9237E22D3B93D00BBCF37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84C9237D22D3B93D00BBCF37 /* Assets.xcassets */; };
 		84C9238122D3B93D00BBCF37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84C9237F22D3B93D00BBCF37 /* LaunchScreen.storyboard */; };
-		84FC121622D56E8A0082CE91 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FC121522D56E8A0082CE91 /* MenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,13 +42,13 @@
 
 /* Begin PBXFileReference section */
 		8401620122D8EF2B00FFF909 /* catPurr.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catPurr.atlas; sourceTree = "<group>"; };
+		843E7DAE22E222A000CDD7CA /* CatWalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatWalk.swift; sourceTree = "<group>"; };
+		843E7DB022E229AA00CDD7CA /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		8451F25722DFDF9D009D621B /* CutScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutScene.swift; sourceTree = "<group>"; };
 		8460B09622E145EE008A63BE /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		8486D2BC22D8155D004C714A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		84ADACE722DD0108005498F4 /* fingerPoint.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fingerPoint.atlas; sourceTree = "<group>"; };
 		84ADACE922DD1738005498F4 /* catWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catWalk.atlas; sourceTree = "<group>"; };
-		84ADACEB22DD1833005498F4 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
-		84ADACED22DD2676005498F4 /* CutScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = CutScene.sks; path = CalmCat/Scenes/CutScene.sks; sourceTree = SOURCE_ROOT; };
 		84C9236D22D3B93C00BBCF37 /* CalmCat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalmCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C9237022D3B93C00BBCF37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84C9237622D3B93C00BBCF37 /* GameScene.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -60,7 +59,6 @@
 		84C9238222D3B93D00BBCF37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84C9238722D3B93D00BBCF37 /* CalmCatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalmCatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C9239222D3B93D00BBCF37 /* CalmCatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalmCatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		84FC121522D56E8A0082CE91 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,13 +90,13 @@
 			isa = PBXGroup;
 			children = (
 				84C9237022D3B93C00BBCF37 /* AppDelegate.swift */,
-				84C9237622D3B93C00BBCF37 /* GameScene.swift */,
-				84C9237822D3B93C00BBCF37 /* GameViewController.swift */,
-				8460B09622E145EE008A63BE /* Score.swift */,
-				84FC121522D56E8A0082CE91 /* MenuViewController.swift */,
-				84ADACEB22DD1833005498F4 /* IntroViewController.swift */,
-				8486D2BC22D8155D004C714A /* Constants.swift */,
 				8451F25722DFDF9D009D621B /* CutScene.swift */,
+				843E7DAE22E222A000CDD7CA /* CatWalk.swift */,
+				84C9237622D3B93C00BBCF37 /* GameScene.swift */,
+				8460B09622E145EE008A63BE /* Score.swift */,
+				843E7DB022E229AA00CDD7CA /* IntroViewController.swift */,
+				84C9237822D3B93C00BBCF37 /* GameViewController.swift */,
+				8486D2BC22D8155D004C714A /* Constants.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -141,7 +139,6 @@
 				84C9237D22D3B93D00BBCF37 /* Assets.xcassets */,
 				84C9237F22D3B93D00BBCF37 /* LaunchScreen.storyboard */,
 				84C9237A22D3B93C00BBCF37 /* Main.storyboard */,
-				84ADACED22DD2676005498F4 /* CutScene.sks */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -263,7 +260,6 @@
 				8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */,
 				84C9237E22D3B93D00BBCF37 /* Assets.xcassets in Resources */,
 				84ADACE822DD0108005498F4 /* fingerPoint.atlas in Resources */,
-				84ADACEE22DD2676005498F4 /* CutScene.sks in Resources */,
 				84C9238122D3B93D00BBCF37 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,12 +287,12 @@
 			files = (
 				8486D2BD22D8155D004C714A /* Constants.swift in Sources */,
 				84C9237722D3B93C00BBCF37 /* GameScene.swift in Sources */,
+				843E7DAF22E222A000CDD7CA /* CatWalk.swift in Sources */,
 				8460B09722E145EE008A63BE /* Score.swift in Sources */,
 				8451F25822DFDF9D009D621B /* CutScene.swift in Sources */,
 				84C9237922D3B93C00BBCF37 /* GameViewController.swift in Sources */,
-				84ADACEC22DD1833005498F4 /* IntroViewController.swift in Sources */,
 				84C9237122D3B93C00BBCF37 /* AppDelegate.swift in Sources */,
-				84FC121622D56E8A0082CE91 /* MenuViewController.swift in Sources */,
+				843E7DB122E229AA00CDD7CA /* IntroViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

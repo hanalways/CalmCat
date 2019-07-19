@@ -15,7 +15,7 @@ class IntroViewController : UIViewController {
         
         if let view = view as? SKView {
             // Create the scene programmatically
-            let scene = GameScene(size: view.bounds.size)
+            let scene = CutScene(size: view.bounds.size)
             scene.scaleMode = .resizeFill
             view.ignoresSiblingOrder = true
             view.showsFPS = true

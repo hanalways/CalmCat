@@ -34,7 +34,7 @@ class Score {
             isTimerRunning = false
         } else {
             seconds -= 1
-//            displayTimer.text = timeString(time: TimeInterval(seconds))
+//            timerNode.text = timeString(time: TimeInterval(seconds))
         }
     }
     

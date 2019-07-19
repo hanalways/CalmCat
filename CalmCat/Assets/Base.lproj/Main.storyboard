@@ -49,7 +49,7 @@
         <scene sceneID="2Sn-In-k4l">
             <objects>
                 <viewController id="xFe-SL-3iY" userLabel="Intro View Controller" customClass="IntroViewController" customModule="CalmCat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="czk-ZZ-8u2">
+                    <view key="view" contentMode="scaleToFill" id="czk-ZZ-8u2" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

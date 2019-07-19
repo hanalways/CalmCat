@@ -20,14 +20,15 @@ class GameScene: SKScene {
   private let circle = SKShapeNode(circleOfRadius: 20)
   private let scorer = Score()
   private var timer = SKLabelNode()
+  private var instructions = SKLabelNode()
   
   
   override func didMove(to view: SKView) {
     setUpScenery()
-//    buildCatPurr()
+    buildCatPurr()
     buildFingerPointer()
     userIndicatorCircle()
-    buildCatWalk()
+//    buildCatWalk()
     buildTimer()
     
 
@@ -36,6 +37,7 @@ class GameScene: SKScene {
 //    view.addGestureRecognizer(recognizer)
 
   }
+  
   
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,7 +55,7 @@ class GameScene: SKScene {
   }
   
   func buildTimer() {
-    timer.fontName = "Arial"
+    timer.fontName = "Helvetica Neue Ultra Light"
     timer.text = "2:00"
     timer.fontSize = 30
     timer.fontColor = .white
@@ -117,16 +119,16 @@ class GameScene: SKScene {
   func buildCatWalk() {
     let catWalkAnimatedAtlas = SKTextureAtlas(named: "catWalk")
     var walkFrames: [SKTexture] = []
-    
+
     let numImages = catWalkAnimatedAtlas.textureNames.count
-    
+
     for i in 1...numImages {
       let catWalkTextureName = "catWalk\(i)"
       let frame = catWalkAnimatedAtlas.textureNamed(catWalkTextureName)
       walkFrames.append(frame)
     }
     catWalkFrames = walkFrames
-    
+
     let firstFrameTexture = catWalkFrames[0]
     catWalk = SKSpriteNode(texture: firstFrameTexture)
     catWalk.position = CGPoint(x: frame.minX + 200, y: frame.maxY - 375)
@@ -135,7 +137,7 @@ class GameScene: SKScene {
     addChild(catWalk)
     animateCatWalk()
   }
-  
+
   func animateCatWalk() {
     let walkRight = SKAction.moveTo(x: catWalk.position.x + 180, duration: 2.0)
     let walkLeft = SKAction.moveTo(x: catWalk.position.x - 180, duration: 2.0)
@@ -144,7 +146,7 @@ class GameScene: SKScene {
     let catWalkSequence = SKAction.sequence([faceRight, walkRight, faceLeft, walkLeft])
     let catWalkAnimation = SKAction.animate(with: catWalkFrames, timePerFrame: 0.2, resize: false, restore: true)
 
-    
+
     catWalk.run(SKAction.repeatForever(catWalkAnimation),
                 withKey:"catWalkInPlace")
     catWalk.run(SKAction.repeatForever(catWalkSequence),
