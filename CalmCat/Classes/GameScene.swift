@@ -25,10 +25,10 @@ class GameScene: SKScene {
   
   override func didMove(to view: SKView) {
     setUpScenery()
-    buildCatPurr()
+//    buildCatPurr()
     buildFingerPointer()
     userIndicatorCircle()
-//    buildCatWalk()
+    buildCatWalk()
     buildTimer()
     
 
