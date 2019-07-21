@@ -31,6 +31,7 @@ class GameScene: SKScene {
   var timeOfLastTap = -1.0
   var timeDifferences = [Double]()
   var medianTapTime = 1.0
+  var timeDifference = 1.0
   
   var scoringPhase = false
   var score = 0
@@ -44,10 +45,6 @@ class GameScene: SKScene {
 
     buildFingerPointer()
     userIndicatorCircle()
-    
-//    buildCatPurr()
-//    buildTimer()
-
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -58,30 +55,74 @@ class GameScene: SKScene {
     
     let touchNodes = self.nodes(at: position)
     touchNodes.forEach { (node) in
-      if node.name == "circle" && !scoringPhase {
-        userButtonTapped()
+      if node.name == "circle" {
+        initializingExercise()
       }
     }
   }
   
   //MARK: Timer functions
-  @objc func userButtonTapped() {
+  @objc func initializingExercise() {
     let timeOfCurrentTap = NSDate().timeIntervalSince1970
-    var timeDifference = 1.0
     
     if timeOfLastTap > 0 {
       timeDifference = timeOfCurrentTap - timeOfLastTap
     }
     
-    if scoringPhase {
-      scoreTaps(timeDifference: timeDifference)
-      fingerPointer.removeFromParent()
-      updateCircle()
+    if !scoringPhase {
+      initializeMedianTapTime()
     } else {
-      initializeMedianTapTime(timeDifference: timeDifference)
+      scoreTaps()
     }
+    
     timeOfLastTap = timeOfCurrentTap
     print(timeDifference)
+  }
+  
+  func initializeMedianTapTime() {
+    if timeOfLastTap > 0 {
+      timeDifferences.append(timeDifference)
+    }
+    
+    if timeDifferences.count == 8 {
+      medianTapTime = timeDifferences.sorted(by: <)[timeDifferences.count/2]
+      scoringPhase = true
+      buildBreathingExercise()
+    }
+  }
+
+  func buildBreathingExercise() {
+    fingerPointer.removeFromParent()
+    updateCircle()
+    runTimer()
+  }
+  
+  func scoreTaps() {
+    totalTaps += 1
+    
+    if (medianTapTime - 0.1) <= timeDifference && timeDifference <= (medianTapTime + 0.1) {
+      score += 1
+      print(score)
+    }
+    
+    if !isTimerRunning {
+      let totalScore = Double(score)/Double(totalTaps)
+      if totalScore > 0.6 {
+        print("Success!")
+        print(totalScore)
+        successScreen()
+      } else {
+        print("Failure")
+        print(totalScore)
+        failScreen()
+      }
+      
+      timerNode.isHidden = true
+      circle.isHidden = true
+      timerNode.removeFromParent()
+      catWalk.removeFromParent()
+    }
+    
   }
 
   
@@ -105,8 +146,6 @@ class GameScene: SKScene {
     if seconds < 1 {
       gameTimer.invalidate()
       isTimerRunning = false
-      timerNode.isHidden = true
-      circle.isHidden = true
     } else {
       seconds -= 1
       timerNode.text = timeString(time: TimeInterval(seconds))
@@ -126,42 +165,7 @@ class GameScene: SKScene {
     }
   }
   
-  func initializeMedianTapTime(timeDifference: Double) {
-    if timeOfLastTap > 0 {
-      timeDifferences.append(timeDifference)
-    }
-    
-    if timeDifferences.count == 8 {
-      medianTapTime = timeDifferences.sorted(by: <)[timeDifferences.count/2]
-      scoringPhase = true
-      runTimer()
-    }
-  }
-  
-  func scoreTaps(timeDifference: Double) {
-    totalTaps += 1
-    
-    if (medianTapTime - 0.1) <= timeDifference && timeDifference <= (medianTapTime + 0.1) {
-      score += 1
-      print(score)
-    }
-    
-    if !isTimerRunning {
-      timerNode.removeFromParent()
-      catWalk.removeFromParent()
-      
-      let totalScore = Double(score)/Double(totalTaps)
-      if totalScore > 0.6 {
-        print("Success!")
-        print(totalScore)
-        successScreen()
-      } else {
-        print("Failure")
-        print(totalScore)
-      }
-    }
-    
-  }
+
 
   //MARK: Segue out screens
   func successScreen() {
