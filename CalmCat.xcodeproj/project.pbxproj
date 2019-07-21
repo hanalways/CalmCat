@@ -10,6 +10,7 @@
 		8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 8401620122D8EF2B00FFF909 /* catPurr.atlas */; };
 		843E7DAF22E222A000CDD7CA /* CatWalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E7DAE22E222A000CDD7CA /* CatWalk.swift */; };
 		843E7DB122E229AA00CDD7CA /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E7DB022E229AA00CDD7CA /* IntroViewController.swift */; };
+		843E7DB322E2CCDC00CDD7CA /* catKnead.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 843E7DB222E2CCDC00CDD7CA /* catKnead.atlas */; };
 		8451F25822DFDF9D009D621B /* CutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451F25722DFDF9D009D621B /* CutScene.swift */; };
 		8460B09722E145EE008A63BE /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460B09622E145EE008A63BE /* Score.swift */; };
 		8486D2BD22D8155D004C714A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486D2BC22D8155D004C714A /* Constants.swift */; };
@@ -44,6 +45,7 @@
 		8401620122D8EF2B00FFF909 /* catPurr.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catPurr.atlas; sourceTree = "<group>"; };
 		843E7DAE22E222A000CDD7CA /* CatWalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatWalk.swift; sourceTree = "<group>"; };
 		843E7DB022E229AA00CDD7CA /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		843E7DB222E2CCDC00CDD7CA /* catKnead.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catKnead.atlas; sourceTree = "<group>"; };
 		8451F25722DFDF9D009D621B /* CutScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutScene.swift; sourceTree = "<group>"; };
 		8460B09622E145EE008A63BE /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		8486D2BC22D8155D004C714A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		84C923AA22D3E63900BBCF37 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				843E7DB222E2CCDC00CDD7CA /* catKnead.atlas */,
 				84ADACE922DD1738005498F4 /* catWalk.atlas */,
 				84ADACE722DD0108005498F4 /* fingerPoint.atlas */,
 				8401620122D8EF2B00FFF909 /* catPurr.atlas */,
@@ -259,6 +262,7 @@
 				84ADACEA22DD1738005498F4 /* catWalk.atlas in Resources */,
 				8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */,
 				84C9237E22D3B93D00BBCF37 /* Assets.xcassets in Resources */,
+				843E7DB322E2CCDC00CDD7CA /* catKnead.atlas in Resources */,
 				84ADACE822DD0108005498F4 /* fingerPoint.atlas in Resources */,
 				84C9238122D3B93D00BBCF37 /* LaunchScreen.storyboard in Resources */,
 			);

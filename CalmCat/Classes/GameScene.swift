@@ -15,30 +15,39 @@ class GameScene: SKScene {
   private var catPurrFrames: [SKTexture] = []
   private var catWalk = SKSpriteNode()
   private var catWalkFrames: [SKTexture] = []
-  private var fingerPointer = SKSpriteNode()
+  var fingerPointer = SKSpriteNode()
   private var fingerPointFrames: [SKTexture] = []
   private let circle = SKShapeNode(circleOfRadius: 20)
   private let scorer = Score()
-  private var timer = SKLabelNode()
+  var timerNode = SKLabelNode()
   private var instructions = SKLabelNode()
+  
+  
+  
+  var seconds = 20
+  var gameTimer = Timer()
+  var isTimerRunning = false
+  var timeOfLastTap = -1.0
+  var timeDifferences = [Double]()
+  var medianTapTime = 1.0
+  
+  var scoringPhase = false
+  var score = 0
+  var totalTaps = 0
+
   
   
   override func didMove(to view: SKView) {
     setUpScenery()
-//    buildCatPurr()
+    buildCatWalk()
+
     buildFingerPointer()
     userIndicatorCircle()
-    buildCatWalk()
-    buildTimer()
     
-
-    
-//    let recognizer = UITapGestureRecognizer(target: self, action: #selector(tap))
-//    view.addGestureRecognizer(recognizer)
+//    buildCatPurr()
+//    buildTimer()
 
   }
-  
-  
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     guard let realTouch = touches.first else {
@@ -49,28 +58,28 @@ class GameScene: SKScene {
     let touchNodes = self.nodes(at: position)
     touchNodes.forEach { (node) in
       if node.name == "fingerPointer" {
-        self.scorer.userButtonTapped()
+        userButtonTapped()
       }
     }
   }
   
   func buildTimer() {
-    timer.fontName = "Helvetica Neue Ultra Light"
-    timer.text = "2:00"
-    timer.fontSize = 30
-    timer.fontColor = .white
-    timer.position = CGPoint(x: frame.midX, y: frame.maxY - 75)
-    timer.zPosition = 1
-    addChild(timer)
+    timerNode.fontName = "Helvetica Neue Ultra Light"
+    timerNode.text = "2:00"
+    timerNode.fontSize = 30
+    timerNode.fontColor = .white
+    timerNode.position = CGPoint(x: frame.midX, y: frame.maxY - 75)
+    timerNode.zPosition = 1
+    addChild(timerNode)
   }
   
   func userIndicatorCircle() {
-    
-    circle.position = CGPoint(x: fingerPointer.position.x - 25, y: fingerPointer.position.y + 50)
     circle.zPosition = 1
     circle.strokeColor = SKColor.white.withAlphaComponent(0.5)
-    circle.glowWidth = 1.0
     circle.fillColor = .clear
+    circle.position = CGPoint(x: fingerPointer.position.x - 25, y: fingerPointer.position.y + 50)
+      circle.glowWidth = 1.0
+    
     
     addChild(circle)
     animateUserIndicatorCircle()
@@ -139,8 +148,8 @@ class GameScene: SKScene {
   }
 
   func animateCatWalk() {
-    let walkRight = SKAction.moveTo(x: catWalk.position.x + 180, duration: 2.0)
-    let walkLeft = SKAction.moveTo(x: catWalk.position.x - 180, duration: 2.0)
+    let walkRight = SKAction.moveTo(x: catWalk.position.x + 190, duration: 2.0)
+    let walkLeft = SKAction.moveTo(x: catWalk.position.x - 190, duration: 2.0)
     let faceRight = SKAction.scaleX(to: -1.0, duration: 0.1)
     let faceLeft = SKAction.scaleX(to: 1.0, duration: 0.1)
     let catWalkSequence = SKAction.sequence([faceRight, walkRight, faceLeft, walkLeft])
@@ -206,4 +215,102 @@ class GameScene: SKScene {
     window.size = CGSize(width: size.width * 0.23, height: size.height * 0.14)
     addChild(window)
   }
+  
+  func runTimer() {
+    buildTimer()
+    gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    isTimerRunning = true
+  }
+  
+  @objc func updateTimer() {
+    if seconds < 1 {
+      gameTimer.invalidate()
+      isTimerRunning = false
+      timerNode.isHidden = true
+      circle.isHidden = true
+    } else {
+      seconds -= 1
+      timerNode.text = timeString(time: TimeInterval(seconds))
+    }
+  }
+  
+  func timeString(time:TimeInterval) -> String {
+    let minutes = Int(time) / 60 % 60
+    let seconds = Int(time) % 60
+    let rString = String(format: "\(minutes):%02d", seconds)
+    return rString
+  }
+  
+  func startButtonTapped() {
+    if isTimerRunning == false {
+      runTimer()
+    }
+  }
+  
+  func updateCircle() {
+    circle.position = CGPoint(x: frame.midX, y: frame.midY - 300)
+    circle.glowWidth = 1.5
+    
+    let pulseOut = SKAction.scale(to: 4.0, duration: 4*medianTapTime)
+    let pulseIn = SKAction.scale(to: 0.0, duration: 4*medianTapTime)
+    let sequence = SKAction.sequence([pulseOut, pulseIn])
+    circle.removeAllActions()
+    
+    circle.run(SKAction.repeatForever(sequence))
+    
+  }
+  
+  @objc func userButtonTapped() {
+    let timeOfCurrentTap = NSDate().timeIntervalSince1970
+    var timeDifference = 1.0
+    
+    if timeOfLastTap > 0 {
+      timeDifference = timeOfCurrentTap - timeOfLastTap
+    }
+    
+    if scoringPhase {
+      scoreTaps(timeDifference: timeDifference)
+      fingerPointer.removeFromParent()
+      updateCircle()
+    } else {
+      initializeMedianTapTime(timeDifference: timeDifference)
+    }
+    timeOfLastTap = timeOfCurrentTap
+    print(timeDifference)
+  }
+  
+  func scoreTaps(timeDifference: Double) {
+    totalTaps += 1
+    
+    if (medianTapTime - 0.1) <= timeDifference && timeDifference <= (medianTapTime + 0.1) {
+      score += 1
+      print(score)
+    }
+    
+    if !isTimerRunning {
+      timerNode.removeFromParent()
+      let totalScore = Double(score)/Double(totalTaps)
+      if totalScore > 0.6 {
+        print("Success!")
+        print(totalScore)
+      } else {
+        print("Failure")
+        print(totalScore)
+      }
+    }
+    
+  }
+  
+  func initializeMedianTapTime(timeDifference: Double) {
+    if timeOfLastTap > 0 {
+      timeDifferences.append(timeDifference)
+    }
+    
+    if timeDifferences.count == 8 {
+      medianTapTime = timeDifferences.sorted(by: <)[timeDifferences.count/2]
+      scoringPhase = true
+      runTimer()
+    }
+  }
+
 }
