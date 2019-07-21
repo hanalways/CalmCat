@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalmCat/Classes/GameScene.swift"
-            timestampString = "585429819.4174041"
+            timestampString = "585431808.033023"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "GameScene"
             landmarkType = "3">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CalmCat/Classes/GameScene.swift"
-            timestampString = "585429819.417743"
+            timestampString = "585431808.033378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "buildFingerPointer()"
             landmarkType = "7">
          </BreakpointContent>

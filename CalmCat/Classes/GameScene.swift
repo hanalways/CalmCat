@@ -11,6 +11,7 @@ import UIKit
 class GameScene: SKScene {
   var gameViewController:GameViewController!
   
+  // SPRITE CLASS VARIABLES
   private var catPurr = SKSpriteNode()
   private var catPurrFrames: [SKTexture] = []
   private var catWalk = SKSpriteNode()
@@ -23,7 +24,7 @@ class GameScene: SKScene {
   private var instructions = SKLabelNode()
   
   
-  
+  // TIMER VARIABLES
   var seconds = 20
   var gameTimer = Timer()
   var isTimerRunning = false
@@ -57,11 +58,32 @@ class GameScene: SKScene {
     
     let touchNodes = self.nodes(at: position)
     touchNodes.forEach { (node) in
-      if node.name == "fingerPointer" {
+      if node.name == "circle" && !scoringPhase {
         userButtonTapped()
       }
     }
   }
+  
+  //MARK: Timer functions
+  @objc func userButtonTapped() {
+    let timeOfCurrentTap = NSDate().timeIntervalSince1970
+    var timeDifference = 1.0
+    
+    if timeOfLastTap > 0 {
+      timeDifference = timeOfCurrentTap - timeOfLastTap
+    }
+    
+    if scoringPhase {
+      scoreTaps(timeDifference: timeDifference)
+      fingerPointer.removeFromParent()
+      updateCircle()
+    } else {
+      initializeMedianTapTime(timeDifference: timeDifference)
+    }
+    timeOfLastTap = timeOfCurrentTap
+    print(timeDifference)
+  }
+
   
   func buildTimer() {
     timerNode.fontName = "Helvetica Neue Ultra Light"
@@ -73,17 +95,117 @@ class GameScene: SKScene {
     addChild(timerNode)
   }
   
+  func runTimer() {
+    buildTimer()
+    gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
+    isTimerRunning = true
+  }
+  
+  @objc func updateTimer() {
+    if seconds < 1 {
+      gameTimer.invalidate()
+      isTimerRunning = false
+      timerNode.isHidden = true
+      circle.isHidden = true
+    } else {
+      seconds -= 1
+      timerNode.text = timeString(time: TimeInterval(seconds))
+    }
+  }
+  
+  func timeString(time:TimeInterval) -> String {
+    let minutes = Int(time) / 60 % 60
+    let seconds = Int(time) % 60
+    let rString = String(format: "\(minutes):%02d", seconds)
+    return rString
+  }
+  
+  func startButtonTapped() {
+    if isTimerRunning == false {
+      runTimer()
+    }
+  }
+  
+  func initializeMedianTapTime(timeDifference: Double) {
+    if timeOfLastTap > 0 {
+      timeDifferences.append(timeDifference)
+    }
+    
+    if timeDifferences.count == 8 {
+      medianTapTime = timeDifferences.sorted(by: <)[timeDifferences.count/2]
+      scoringPhase = true
+      runTimer()
+    }
+  }
+  
+  func scoreTaps(timeDifference: Double) {
+    totalTaps += 1
+    
+    if (medianTapTime - 0.1) <= timeDifference && timeDifference <= (medianTapTime + 0.1) {
+      score += 1
+      print(score)
+    }
+    
+    if !isTimerRunning {
+      timerNode.removeFromParent()
+      catWalk.removeFromParent()
+      
+      let totalScore = Double(score)/Double(totalTaps)
+      if totalScore > 0.6 {
+        print("Success!")
+        print(totalScore)
+        successScreen()
+      } else {
+        print("Failure")
+        print(totalScore)
+      }
+    }
+    
+  }
+
+  //MARK: Segue out screens
+  func successScreen() {
+    buildCatPurr()
+    let successNode = SKLabelNode(text: "Success!")
+    successNode.fontName = "AvenirNext-Bold"
+    successNode.color = .green
+    successNode.position = CGPoint(x: frame.midX, y: frame.maxY - 300)
+    successNode.fontSize = 80
+    successNode.zPosition = 2
+    addChild(successNode)
+  }
+  
+  func failScreen() {
+    let catYell = SKSpriteNode(imageNamed: "catYell")
+    catYell.position = CGPoint(x: frame.midX, y: frame.midY)
+    catYell.zPosition = 2
+    addChild(catYell)
+    
+    let failNode = SKLabelNode(text: "Failure!")
+    failNode.fontName = "AvenirNext-Bold"
+    failNode.color = .green
+    failNode.position = CGPoint(x: frame.midX, y: frame.maxY - 300)
+    failNode.fontSize = 80
+    failNode.zPosition = 2
+    addChild(failNode)
+    
+  }
+
+
+
+  
+  
+  //MARK: Circle functions
   func userIndicatorCircle() {
-    circle.zPosition = 1
-    circle.strokeColor = SKColor.white.withAlphaComponent(0.5)
+    circle.name = "circle"
+    circle.zPosition = 2
+    circle.strokeColor = SKColor.white.withAlphaComponent(0.7)
     circle.fillColor = .clear
     circle.position = CGPoint(x: fingerPointer.position.x - 25, y: fingerPointer.position.y + 50)
       circle.glowWidth = 1.0
     
-    
     addChild(circle)
     animateUserIndicatorCircle()
-    
   }
     
   func animateUserIndicatorCircle() {
@@ -94,7 +216,21 @@ class GameScene: SKScene {
     self.circle.run(repeatPulse)
   }
   
+  func updateCircle() {
+    circle.position = CGPoint(x: frame.midX, y: frame.midY - 300)
+    circle.glowWidth = 1.5
+    
+    let pulseOut = SKAction.scale(to: 4.0, duration: 4*medianTapTime)
+    let pulseIn = SKAction.scale(to: 0.0, duration: 4*medianTapTime)
+    let sequence = SKAction.sequence([pulseOut, pulseIn])
+    circle.removeAllActions()
+    
+    circle.run(SKAction.repeatForever(sequence))
+  }
+
   
+  
+  //MARK: FingerPointer Node
   func buildFingerPointer() {
     let fingerPointerAnimatedAtlas = SKTextureAtlas(named: "fingerPoint")
     var fingerFrames: [SKTexture] = []
@@ -124,7 +260,7 @@ class GameScene: SKScene {
                 withKey:"fingerPointInPlace")
   }
   
-  //MARK:ALL CAT RELATED THING
+  //MARK: All of the Cats!
   func buildCatWalk() {
     let catWalkAnimatedAtlas = SKTextureAtlas(named: "catWalk")
     var walkFrames: [SKTexture] = []
@@ -216,101 +352,4 @@ class GameScene: SKScene {
     addChild(window)
   }
   
-  func runTimer() {
-    buildTimer()
-    gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
-    isTimerRunning = true
-  }
-  
-  @objc func updateTimer() {
-    if seconds < 1 {
-      gameTimer.invalidate()
-      isTimerRunning = false
-      timerNode.isHidden = true
-      circle.isHidden = true
-    } else {
-      seconds -= 1
-      timerNode.text = timeString(time: TimeInterval(seconds))
-    }
-  }
-  
-  func timeString(time:TimeInterval) -> String {
-    let minutes = Int(time) / 60 % 60
-    let seconds = Int(time) % 60
-    let rString = String(format: "\(minutes):%02d", seconds)
-    return rString
-  }
-  
-  func startButtonTapped() {
-    if isTimerRunning == false {
-      runTimer()
-    }
-  }
-  
-  func updateCircle() {
-    circle.position = CGPoint(x: frame.midX, y: frame.midY - 300)
-    circle.glowWidth = 1.5
-    
-    let pulseOut = SKAction.scale(to: 4.0, duration: 4*medianTapTime)
-    let pulseIn = SKAction.scale(to: 0.0, duration: 4*medianTapTime)
-    let sequence = SKAction.sequence([pulseOut, pulseIn])
-    circle.removeAllActions()
-    
-    circle.run(SKAction.repeatForever(sequence))
-    
-  }
-  
-  @objc func userButtonTapped() {
-    let timeOfCurrentTap = NSDate().timeIntervalSince1970
-    var timeDifference = 1.0
-    
-    if timeOfLastTap > 0 {
-      timeDifference = timeOfCurrentTap - timeOfLastTap
-    }
-    
-    if scoringPhase {
-      scoreTaps(timeDifference: timeDifference)
-      fingerPointer.removeFromParent()
-      updateCircle()
-    } else {
-      initializeMedianTapTime(timeDifference: timeDifference)
-    }
-    timeOfLastTap = timeOfCurrentTap
-    print(timeDifference)
-  }
-  
-  func scoreTaps(timeDifference: Double) {
-    totalTaps += 1
-    
-    if (medianTapTime - 0.1) <= timeDifference && timeDifference <= (medianTapTime + 0.1) {
-      score += 1
-      print(score)
-    }
-    
-    if !isTimerRunning {
-      timerNode.removeFromParent()
-      let totalScore = Double(score)/Double(totalTaps)
-      if totalScore > 0.6 {
-        print("Success!")
-        print(totalScore)
-      } else {
-        print("Failure")
-        print(totalScore)
-      }
-    }
-    
-  }
-  
-  func initializeMedianTapTime(timeDifference: Double) {
-    if timeOfLastTap > 0 {
-      timeDifferences.append(timeDifference)
-    }
-    
-    if timeDifferences.count == 8 {
-      medianTapTime = timeDifferences.sorted(by: <)[timeDifferences.count/2]
-      scoringPhase = true
-      runTimer()
-    }
-  }
-
 }
