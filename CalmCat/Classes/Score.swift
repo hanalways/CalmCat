@@ -9,6 +9,7 @@
 import Foundation
 
 class Score {
+    // THIS IS A CHANGE!
 //    var scene: GameScene!
 //
 //    var seconds = 20
