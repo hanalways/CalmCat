@@ -109,9 +109,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="poX-U4-QgO">
-                                <rect key="frame" x="147" y="324" width="81" height="30"/>
+                                <rect key="frame" x="142" y="324" width="91" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pet The Cat"/>
+                                <state key="normal" title="Laser Pointer"/>
                                 <connections>
                                     <segue destination="FYe-NF-duG" kind="show" id="bVu-yc-u58"/>
                                 </connections>
@@ -132,6 +132,16 @@
                     <view key="view" contentMode="scaleToFill" id="opt-vC-0tW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0w-RO-aPk">
+                                <rect key="frame" x="347" y="433" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="&gt;&gt;"/>
+                                <connections>
+                                    <segue destination="IQJ-vm-GLD" kind="show" id="CGq-HA-1re"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                         <viewLayoutGuide key="safeArea" id="Mhn-p5-V44"/>
                     </view>
@@ -140,10 +150,26 @@
             </objects>
             <point key="canvasLocation" x="290" y="916"/>
         </scene>
+        <!--Laser View Controller-->
+        <scene sceneID="Efb-4n-nnT">
+            <objects>
+                <viewController id="IQJ-vm-GLD" customClass="LaserViewController" customModule="CalmCat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yoa-Lg-BCF" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="l09-Xb-dDl"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CAS-QC-gJW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1206" y="915"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bed" width="745" height="751"/>
         <image name="calmCat" width="574" height="201"/>
         <image name="catSleep" width="256" height="256"/>
     </resources>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
