@@ -24,6 +24,20 @@ class CutScene: SKScene {
         setUpScenery()
         animateCatYell()
         animateLogo()
+        swipeToMenu()
+    }
+    
+    func swipeToMenu() {
+        let swipeToSkip = SKLabelNode(text: "Swipe Left to Skip")
+        
+        swipeToSkip.position = CGPoint(x: frame.midX, y: frame.maxY - 70)
+        swipeToSkip.fontSize = 20
+        swipeToSkip.zPosition = 3
+        addChild(swipeToSkip)
+        
+        let fadeOut = SKAction.fadeOut(withDuration: 0.9)
+        let fadeIn = SKAction.fadeIn(withDuration: 0.9)
+        let sequence = SKAction.sequence([fadeOut, fadeIn]);      swipeToSkip.run(SKAction.repeatForever(sequence))
     }
     
     func animateLogo() {

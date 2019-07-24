@@ -14,17 +14,16 @@ class GameScene: SKScene {
   // SPRITE CLASS VARIABLES
   private var catPurr = SKSpriteNode()
   private var catPurrFrames: [SKTexture] = []
+  private var catFacePalm = SKSpriteNode()
+  private var catFacePalmFrames: [SKTexture] = []
   private var catWalk = SKSpriteNode()
   private var catWalkFrames: [SKTexture] = []
   var fingerPointer = SKSpriteNode()
   private var fingerPointFrames: [SKTexture] = []
   private let circle = SKShapeNode(circleOfRadius: 20)
-  private let scorer = Score()
   var timerNode = SKLabelNode()
-  private var instructions = SKLabelNode()
   
-  
-  // TIMER VARIABLES
+  // TIMER/SCORING VARIABLES
   var seconds = 20
   var gameTimer = Timer()
   var isTimerRunning = false
@@ -57,6 +56,11 @@ class GameScene: SKScene {
     touchNodes.forEach { (node) in
       if node.name == "circle" {
         initializingExercise()
+      } else if node.name == "replayButton" {
+        let reveal: SKTransition = SKTransition.flipHorizontal(withDuration: 0.2)
+        let scene = GameScene(size: self.view!.bounds.size)
+        scene.scaleMode = .aspectFill
+        self.view?.presentScene(scene, transition: reveal)
       }
     }
   }
@@ -117,6 +121,7 @@ class GameScene: SKScene {
         failScreen()
       }
       
+      buildReplayButton()
       timerNode.isHidden = true
       circle.isHidden = true
       timerNode.removeFromParent()
@@ -127,7 +132,7 @@ class GameScene: SKScene {
 
   
   func buildTimer() {
-    timerNode.fontName = "Helvetica Neue Ultra Light"
+    timerNode.fontName = "Helvetica Neue-Light"
     timerNode.text = "2:00"
     timerNode.fontSize = 30
     timerNode.fontColor = .white
@@ -168,6 +173,14 @@ class GameScene: SKScene {
 
 
   //MARK: Segue out screens
+  func buildReplayButton() {
+    let replayButton = SKLabelNode(text: ">> replay?")
+    replayButton.name = "replayButton"
+    replayButton.position = CGPoint(x: frame.midX, y: frame.minY + 200)
+    replayButton.zPosition = 3
+    addChild(replayButton)
+  }
+  
   func successScreen() {
     buildCatPurr()
     let successNode = SKLabelNode(text: "Success!")
@@ -180,10 +193,7 @@ class GameScene: SKScene {
   }
   
   func failScreen() {
-    let catYell = SKSpriteNode(imageNamed: "catYell")
-    catYell.position = CGPoint(x: frame.midX, y: frame.midY)
-    catYell.zPosition = 2
-    addChild(catYell)
+      buildCatFacePalm()
     
     let failNode = SKLabelNode(text: "Failure!")
     failNode.fontName = "AvenirNext-Bold"
@@ -205,7 +215,7 @@ class GameScene: SKScene {
     circle.zPosition = 2
     circle.strokeColor = SKColor.white.withAlphaComponent(0.7)
     circle.fillColor = .clear
-    circle.position = CGPoint(x: fingerPointer.position.x - 25, y: fingerPointer.position.y + 50)
+    circle.position = CGPoint(x: fingerPointer.position.x - 25, y: fingerPointer.position.y + 45)
       circle.glowWidth = 1.0
     
     addChild(circle)
@@ -214,18 +224,18 @@ class GameScene: SKScene {
     
   func animateUserIndicatorCircle() {
     let pulseUp = SKAction.scale(to: 1.0, duration: 0.7)
-    let pulseDown = SKAction.scale(to: 0.0, duration: 0.7)
+    let pulseDown = SKAction.scale(to: 0.5, duration: 0.7)
     let pulse = SKAction.sequence([pulseUp, pulseDown])
     let repeatPulse = SKAction.repeatForever(pulse)
     self.circle.run(repeatPulse)
   }
   
   func updateCircle() {
-    circle.position = CGPoint(x: frame.midX, y: frame.midY - 300)
+    circle.position = CGPoint(x: fingerPointer.position.x - 25, y: fingerPointer.position.y + 45)
     circle.glowWidth = 1.5
     
     let pulseOut = SKAction.scale(to: 4.0, duration: 4*medianTapTime)
-    let pulseIn = SKAction.scale(to: 0.0, duration: 4*medianTapTime)
+    let pulseIn = SKAction.scale(to: 0.5, duration: 4*medianTapTime)
     let sequence = SKAction.sequence([pulseOut, pulseIn])
     circle.removeAllActions()
     
@@ -250,7 +260,7 @@ class GameScene: SKScene {
     let firstFrameTexture = fingerFrames[0]
     print(firstFrameTexture)
     fingerPointer = SKSpriteNode(texture: firstFrameTexture)
-    fingerPointer.position = CGPoint(x: frame.midX + 100, y: frame.minY + 120)
+    fingerPointer.position = CGPoint(x: frame.midX + 10, y: frame.midY - 250)
     fingerPointer.size = CGSize(width: size.width/6, height: size.height/7)
     fingerPointer.zPosition = 2
     fingerPointer.name = "fingerPointer"
@@ -329,8 +339,33 @@ class GameScene: SKScene {
     catPurr.run(SKAction.repeatForever(SKAction.animate(with: catPurrFrames, timePerFrame: 0.2, resize: false, restore: true)),
                 withKey:"catPurrInPlace")
   }
+
+  func buildCatFacePalm() {
+    let catFacePalmAnimatedAtlas = SKTextureAtlas(named: "catFacePalm")
+    var facePalmFrames: [SKTexture] = []
+    
+    let numImages = catFacePalmAnimatedAtlas.textureNames.count
+    
+    for i in 1...numImages {
+      let catFacePalmTextureName = "catFacePalm\(i)"
+      let frame = catFacePalmAnimatedAtlas.textureNamed(catFacePalmTextureName)
+      facePalmFrames.append(frame)
+    }
+    catFacePalmFrames = facePalmFrames
+    
+    let firstFrameTexture = catFacePalmFrames[0]
+    catFacePalm = SKSpriteNode(texture: firstFrameTexture)
+    catFacePalm.position = CGPoint(x: frame.midX, y: frame.midY)
+    catFacePalm.zPosition = 2
+    
+    addChild(catFacePalm)
+    animateCatFacePalm()
+  }
+
   
-  
+  func animateCatFacePalm() {
+    catFacePalm.run(SKAction.repeatForever(SKAction.animate(with: catFacePalmFrames, timePerFrame: 0.2, resize: false, restore: true)), withKey:"catFacePalmAnimation")
+  }
   
   func setUpScenery() {
     backgroundColor = .black
