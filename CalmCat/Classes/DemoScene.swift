@@ -13,6 +13,7 @@ class DemoScene: SKScene {
     var demoViewController:DemoViewController!
 
     override func didMove(to view: SKView) {
-        backgroundColor = .blue
+        backgroundColor = .black
+        
     }
 }
