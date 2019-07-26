@@ -38,6 +38,8 @@ class CutScene: SKScene {
         let fadeOut = SKAction.fadeOut(withDuration: 0.9)
         let fadeIn = SKAction.fadeIn(withDuration: 0.9)
         let sequence = SKAction.sequence([fadeOut, fadeIn]);      swipeToSkip.run(SKAction.repeatForever(sequence))
+        
+        
     }
     
     func animateLogo() {

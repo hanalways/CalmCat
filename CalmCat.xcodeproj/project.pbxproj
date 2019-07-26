@@ -12,6 +12,7 @@
 		8413FC3922E8013A00B0C690 /* DemoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413FC3822E8013A00B0C690 /* DemoScene.swift */; };
 		8413FC4122EA1D2300B0C690 /* LaserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413FC4022EA1D2300B0C690 /* LaserViewController.swift */; };
 		8413FC4322EA1D5500B0C690 /* LaserScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8413FC4222EA1D5500B0C690 /* LaserScene.swift */; };
+		8413FC4522EA571900B0C690 /* RichelaKids.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8413FC4422EA46CE00B0C690 /* RichelaKids.otf */; };
 		843E7DB122E229AA00CDD7CA /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E7DB022E229AA00CDD7CA /* IntroViewController.swift */; };
 		843E7DB322E2CCDC00CDD7CA /* catKnead.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 843E7DB222E2CCDC00CDD7CA /* catKnead.atlas */; };
 		8451F25822DFDF9D009D621B /* CutScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451F25722DFDF9D009D621B /* CutScene.swift */; };
@@ -51,6 +52,7 @@
 		8413FC3822E8013A00B0C690 /* DemoScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScene.swift; sourceTree = "<group>"; };
 		8413FC4022EA1D2300B0C690 /* LaserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LaserViewController.swift; path = CalmCat/Classes/LaserViewController.swift; sourceTree = SOURCE_ROOT; };
 		8413FC4222EA1D5500B0C690 /* LaserScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserScene.swift; sourceTree = "<group>"; };
+		8413FC4422EA46CE00B0C690 /* RichelaKids.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RichelaKids.otf; sourceTree = "<group>"; };
 		843E7DB022E229AA00CDD7CA /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		843E7DB222E2CCDC00CDD7CA /* catKnead.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = catKnead.atlas; sourceTree = "<group>"; };
 		8451F25722DFDF9D009D621B /* CutScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutScene.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				84C9238222D3B93D00BBCF37 /* Info.plist */,
+				8413FC4422EA46CE00B0C690 /* RichelaKids.otf */,
 				8486D2BB22D81372004C714A /* Classes */,
 				84C923AA22D3E63900BBCF37 /* Assets */,
 			);
@@ -273,6 +276,7 @@
 				84C9237C22D3B93C00BBCF37 /* Main.storyboard in Resources */,
 				84ADACEA22DD1738005498F4 /* catWalk.atlas in Resources */,
 				8401620222D8EF2B00FFF909 /* catPurr.atlas in Resources */,
+				8413FC4522EA571900B0C690 /* RichelaKids.otf in Resources */,
 				84C9237E22D3B93D00BBCF37 /* Assets.xcassets in Resources */,
 				843E7DB322E2CCDC00CDD7CA /* catKnead.atlas in Resources */,
 				8413FC3722E7C08900B0C690 /* catFacePalm.atlas in Resources */,

@@ -9,6 +9,7 @@ import SpriteKit
 import UIKit
 
 class DemoViewController: UIViewController {
+    @IBOutlet weak var arrowButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,4 +25,5 @@ class DemoViewController: UIViewController {
         }
         
     }
+    
 }

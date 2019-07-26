@@ -9,6 +9,8 @@ import SpriteKit
 import UIKit
 
 class GameScene: SKScene {
+  var dismissDelegate:GameSceneDelegate?
+  
   var gameViewController:GameViewController!
   
   // SPRITE CLASS VARIABLES
@@ -57,10 +59,7 @@ class GameScene: SKScene {
       if node.name == "circle" {
         initializingExercise()
       } else if node.name == "replayButton" {
-        let reveal: SKTransition = SKTransition.flipHorizontal(withDuration: 0.2)
-        let scene = GameScene(size: self.view!.bounds.size)
-        scene.scaleMode = .aspectFill
-        self.view?.presentScene(scene, transition: reveal)
+        self.dismissDelegate?.dismiss()
       }
     }
   }

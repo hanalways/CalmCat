@@ -18,10 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoJ-oh-3vG">
-                                <rect key="frame" x="323" y="424" width="44" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoJ-oh-3vG">
+                                <rect key="frame" x="320" y="659" width="40" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="&gt;&gt;"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="nextButton" image="arrowButton"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="show" id="ecb-K5-Hc6"/>
                                 </connections>
@@ -170,6 +173,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowButton" width="150" height="150"/>
         <image name="bed" width="745" height="751"/>
         <image name="calmCat" width="574" height="201"/>
         <image name="catSleep" width="256" height="256"/>
