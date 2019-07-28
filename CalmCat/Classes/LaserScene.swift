@@ -11,12 +11,47 @@ import UIKit
 
 class LaserScene: SKScene {
     var laserViewController:LaserViewController!
+    let catSprite = SKSpriteNode(imageNamed: "catNeutral")
+    var catDirection = "SouthEast"
 
     override func didMove(to view: SKView) {
         backgroundColor = .black
         setUpScenery()
-        catSprite()
+        buildCatSprite()
         buildPath()
+        buildLaserPath()
+    }
+    
+    func buildLaserPath() {
+        var laserPoints: [SKNode] = []
+        
+        for i in 1...3 {
+            let laserPoint = SKShapeNode(circleOfRadius: 5)
+            laserPoint.position = CGPoint(x: (i * 50), y: (i * 50))
+            laserPoint.zPosition = 3
+            laserPoint.name = "point\(i)"
+            laserPoint.fillColor = .red
+            laserPoints.append(laserPoint)
+        }
+        
+        laserPoints.forEach { point in
+            print(point)
+            addChild(point)
+        }
+
+    }
+    
+    func buildCatSprite() {
+        catSprite.position = CGPoint(x: frame.midX, y: frame.midY)
+        catSprite.zPosition = 3
+        addChild(catSprite)
+    }
+    
+    func animateCatSprite() {
+        let catFrame = "cat\(catDirection)"
+        let catTexture = SKTexture(imageNamed: catFrame)
+        let switchFrame = SKAction.setTexture(catTexture, resize: true)
+        catSprite.run(switchFrame)
     }
     
     func buildPath() {
@@ -34,12 +69,25 @@ class LaserScene: SKScene {
         pathLine.run(move)
     }
     
-    func catSprite() {
-        let catSprite = SKSpriteNode(imageNamed: "catLaunch")
-        catSprite.position = CGPoint(x: frame.midX, y: frame.midY)
-        catSprite.zPosition = 2
-        addChild(catSprite)
+    override func touchesBegan(_ touches:Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.location(in: self)
+        
+        if location.y < frame.midY {
+            catDirection = "SouthEast"
+            print(catDirection)
+        } else if location.y > frame.midY {
+            catDirection = "NorthEast"
+            print(catDirection)
+        } else {
+            catDirection = "Neutral"
+            print(catDirection)
+        }
+        animateCatSprite()
     }
+    
     
     func setUpScenery() {
         backgroundColor = .black

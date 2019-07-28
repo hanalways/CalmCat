@@ -41,11 +41,25 @@ class GameScene: SKScene {
   
   
   override func didMove(to view: SKView) {
+    countDown()
+  }
+  
+  func countDown() {
+    let count = SKLabelNode(fontNamed: "RichelaKids")
+    count.fontSize = 65
+    count.position = CGPoint(x: frame.midX, y: frame.midY)
+    addChild(count)
+    
+    for i in 1...3 {
+      count.text = "\(i)..."
+      
+    }
     setUpScenery()
     buildCatWalk()
-
+    
     buildFingerPointer()
     userIndicatorCircle()
+
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

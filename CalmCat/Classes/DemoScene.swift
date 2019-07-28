@@ -25,7 +25,7 @@ class DemoScene: SKScene {
     }
     
     func instructions() {
-        let instructionsA = SKLabelNode()
+        let instructionsA = SKLabelNode(fontNamed: "GillSans-SemiBold")
         instructionsA.text = "Calm the anxious cat"
         instructionsA.fontColor = .white
         instructionsA.fontSize = 20
@@ -33,7 +33,7 @@ class DemoScene: SKScene {
         instructionsA.zPosition = 3
         addChild(instructionsA)
         
-        let instructionsB = SKLabelNode()
+        let instructionsB = SKLabelNode(fontNamed: "GillSans-SemiBold")
         instructionsB.text = "by setting your"
         instructionsB.fontColor = .white
         instructionsB.fontSize = 20
@@ -41,7 +41,7 @@ class DemoScene: SKScene {
         instructionsB.zPosition = 3
         addChild(instructionsB)
         
-        let instructionsC = SKLabelNode()
+        let instructionsC = SKLabelNode(fontNamed: "GillSans-SemiBold")
         instructionsC.text = "consistent, internal rhythm"
         instructionsC.fontColor = .white
         instructionsC.fontSize = 20

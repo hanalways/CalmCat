@@ -23,6 +23,6 @@ class LaserViewController: UIViewController {
             view.showsNodeCount = true
             view.presentScene(scene)
         }
-        
     }
+    
 }
