@@ -49,15 +49,9 @@ class CutScene: SKScene {
         calmCatLogo.zPosition = 3
         addChild(calmCatLogo)
         
-        // MAYBE ADD GRAVITY?! This would make sense to be physics
+
         let logoDrop = SKAction.moveTo(y: frame.maxY - 300, duration: 0.2)
-//        let bounceUp = SKAction.moveTo(y: frame.maxY - 250, duration: 0.3)
-//        let bounceRight = SKAction.rotate(byAngle: 1, duration: 0.2)
-//        let bounceDown = SKAction.moveTo(y: frame.maxY - 300, duration: 0.2)
-//        let bounceLeft = SKAction.rotate(byAngle: -2, duration: 0.2)
-//        let reposition = SKAction.rotate(byAngle: 1, duration: 0.1)
-//        let bounceGroupUp = SKAction.group([bounceUp, bounceLeft])
-//        let bounceGroupDown = SKAction.group([bounceDown, bounceRight])
+
         let sequence = SKAction.sequence([wait, logoDrop])
         
         calmCatLogo.run(sequence)
@@ -138,6 +132,9 @@ class CutScene: SKScene {
         
         let zSequence = SKAction.sequence([zGroupOut, zGroupReset, resetZAlpha])
         let endSequence = SKAction.sequence([wait, actionDone])
+        
+        let snoreSound = SKAudioNode(fileNamed: "Snoring.mp3")
+        addChild(snoreSound)
         
         sleepingZ.run(SKAction.repeatForever(zSequence), withKey: "SleepingZs")
         sleepingZ.run(endSequence)
