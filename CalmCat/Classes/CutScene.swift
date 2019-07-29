@@ -15,7 +15,7 @@ class CutScene: SKScene {
     let bed = SKSpriteNode(imageNamed: ImageName.Bed)
     let table = SKSpriteNode(imageNamed: ImageName.Table)
     let window = SKSpriteNode(imageNamed: ImageName.Window)
-    let wait = SKAction.wait(forDuration: 5.5)
+    let wait = SKAction.wait(forDuration: 6.0)
 
     override func didMove(to view: SKView) {
         backgroundColor = .black
@@ -37,8 +37,19 @@ class CutScene: SKScene {
         
         let fadeOut = SKAction.fadeOut(withDuration: 0.9)
         let fadeIn = SKAction.fadeIn(withDuration: 0.9)
-        let sequence = SKAction.sequence([fadeOut, fadeIn]);      swipeToSkip.run(SKAction.repeatForever(sequence))
+        let sequence = SKAction.sequence([fadeOut, fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, fadeOut]);      swipeToSkip.run(sequence)
         
+        let menuButton = SKLabelNode(fontNamed: "RichelaKids")
+        menuButton.text = "Swipe To Start !"
+        menuButton.position = CGPoint(x: frame.midX, y: frame.minY - 100)
+        menuButton.zPosition = 3
+        menuButton.fontColor = .white
+        menuButton.alpha = 0.0
+        addChild(menuButton)
+        
+        let menuButtonMove = SKAction.moveTo(y: frame.midY - 350, duration: 0.1)
+        let menuButtonSequence = SKAction.sequence([wait, SKAction.wait(forDuration: 0.3), fadeIn, menuButtonMove])
+        menuButton.run(menuButtonSequence)
         
     }
     
@@ -50,12 +61,14 @@ class CutScene: SKScene {
         addChild(calmCatLogo)
         
 
-        let logoDrop = SKAction.moveTo(y: frame.maxY - 300, duration: 0.2)
+        let logoDrop = SKAction.moveTo(y: frame.maxY - 300, duration: 0.4)
 
         let sequence = SKAction.sequence([wait, logoDrop])
         
         calmCatLogo.run(sequence)
+        
     }
+    
     
     func animateCatYell() {
         let catYell = SKSpriteNode(imageNamed: "catYell")
@@ -63,7 +76,7 @@ class CutScene: SKScene {
         catYell.zPosition = 2
         addChild(catYell)
         
-        let catYellMoveUp = SKAction.moveTo(y: 350, duration: 0.3)
+        let catYellMoveUp = SKAction.moveTo(y: 350, duration: 0.5)
         let sequence = SKAction.sequence([wait, catYellMoveUp])
         catYell.run(sequence)
     }
@@ -165,11 +178,11 @@ class CutScene: SKScene {
 
     func animateCatWalk() {
         let pause = SKAction.wait(forDuration: 1.0)
-        let walkRight = SKAction.moveTo(x: catWalk.position.x + 700, duration: 0.7)
+        let walkRight = SKAction.moveTo(x: catWalk.position.x + 700, duration: 1.0)
         let closerY = SKAction.moveTo(y: catWalk.position.y - 150, duration: 0.1)
         let closestY = SKAction.moveTo(y: catWalk.position.y - 300, duration: 0.1)
         let scaleCat = SKAction.scale(by: 1.5, duration: 0.1)
-        let walkLeft = SKAction.moveTo(x: catWalk.position.x - 700, duration: 0.7)
+        let walkLeft = SKAction.moveTo(x: catWalk.position.x - 700, duration: 1.0)
         let faceRight = SKAction.scaleX(to: -1.0, duration: 0.1)
         let faceLeft = SKAction.scaleX(to: 1.0, duration: 0.1)
         let actionDone = SKAction.removeFromParent();        let catWalkSequence = SKAction.sequence([faceRight, walkRight, closerY, pause, faceLeft, scaleCat, walkLeft, pause, faceRight, closestY, scaleCat, walkRight, actionDone])

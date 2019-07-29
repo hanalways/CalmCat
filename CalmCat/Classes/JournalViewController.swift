@@ -43,7 +43,7 @@ class JournalFiveViewController: UIViewController {
     
 }
 
-extension JournalViewController : UITextFieldDelegate {
+extension JournalFiveViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

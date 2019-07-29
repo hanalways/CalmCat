@@ -48,7 +48,7 @@ class GameScene: SKScene {
     let count = SKLabelNode(fontNamed: "RichelaKids")
     count.fontSize = 65
     count.position = CGPoint(x: frame.midX, y: frame.midY)
-    addChild(count)
+//    addChild(count)
     
     for i in 1...3 {
       count.text = "\(i)..."
@@ -116,14 +116,24 @@ class GameScene: SKScene {
   
   func scoreTaps() {
     totalTaps += 1
+    let totalScore = Double(score)/Double(totalTaps)
+
+    let successWords = ["Good job!", "Keep going", "Nice rhythm!", "Success!"]
+    
+    
+    
+    let successSprite = SKLabelNode(fontNamed: "RichelaKids")
+    successSprite.fontColor = .green
+    successSprite.fontSize = 20
+    successSprite.text = successWords[0]
     
     if (medianTapTime - 0.1) <= timeDifference && timeDifference <= (medianTapTime + 0.1) {
       score += 1
-      print(score)
+      addChild(successSprite)
+      print(totalScore)
     }
     
     if !isTimerRunning {
-      let totalScore = Double(score)/Double(totalTaps)
       if totalScore > 0.6 {
         print("Success!")
         print(totalScore)
@@ -135,6 +145,7 @@ class GameScene: SKScene {
       }
       
       buildReplayButton()
+      buildMenuButton()
       timerNode.isHidden = true
       circle.isHidden = true
       timerNode.removeFromParent()
@@ -143,6 +154,13 @@ class GameScene: SKScene {
     
   }
 
+  func buildMenuButton() {
+    let menuButton = SKLabelNode()
+    menuButton.text = ">> menu?"
+    menuButton.fontSize = 45
+    menuButton.position = CGPoint(x: frame.midX, y: frame.minY + 200)
+    addChild(menuButton)
+  }
   
   func buildTimer() {
     timerNode.fontName = "Helvetica Neue-Light"
