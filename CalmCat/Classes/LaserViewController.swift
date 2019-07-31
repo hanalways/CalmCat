@@ -22,6 +22,7 @@ class LaserViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
             view.presentScene(scene)
+            
         }
     }
     

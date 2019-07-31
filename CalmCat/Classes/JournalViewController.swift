@@ -17,6 +17,7 @@ class JournalFiveViewController: UIViewController {
     @IBOutlet weak var inputD: UITextField!
     @IBOutlet weak var inputE: UITextField!
     
+    
     @IBOutlet weak var textView: UITextView!
     
     @IBAction func nextTapped(_ sender: Any) {
